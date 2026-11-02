@@ -118,11 +118,58 @@ body.playing #liveChip,body.start #liveChip{display:none}
 #liveWait .t{font-family:var(--mono);font-size:38px;color:#eef2f1;font-variant-numeric:tabular-nums}
 #liveWait .s{font-size:13px;color:#d0d6d6;max-width:30ch}
 #liveWait .her{font-size:14px;color:var(--direct);max-width:30ch}
+/* V3：内幕、时间线、门禁、午夜 */
+#tip{position:absolute;inset:0;z-index:8;background:#050708;display:flex;flex-direction:column;gap:10px;padding:calc(26px + env(safe-area-inset-top,0px)) 18px calc(20px + env(safe-area-inset-bottom,0px));overflow:auto}
+#tip .h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--relay)}
+#tipMsgs{display:flex;flex-direction:column;gap:8px;flex:1}
+#tipMsgs .bub{max-width:92%;font-size:15px;animation:in .3s ease}
+#tipMsgs .bub .zh{font-size:14px;color:#e1e6e5}
+body:not(.lang-en) #tipMsgs .bub .enl{display:none}
+.tl{display:flex;flex-direction:column;gap:5px}
+.tl div{display:flex;gap:10px;font-size:13px;line-height:1.35;color:#c6cdcd;align-items:baseline}
+.tl time{font-family:var(--mono);font-size:12px;color:var(--mute);flex:none;width:44px}
+.tl .past{color:#616b6d}.tl .past time{color:#4c5557;text-decoration:line-through}
+.tl .nx{color:#fff;font-weight:600}.tl .nx time{color:var(--alarm)}
+.tl .zero{color:var(--alarm)}.tl .zero time{color:var(--alarm)}
+#evt{position:absolute;z-index:6;left:max(14px,env(safe-area-inset-left,0px));right:max(14px,env(safe-area-inset-right,0px));top:calc(84px + env(safe-area-inset-top,0px));background:rgba(30,6,3,.9);border:1px solid var(--alarm);border-left-width:3px;border-radius:8px;padding:8px 11px;font-size:14px;color:#fff;animation:in .25s ease}
+#evt time{font-family:var(--mono);font-size:11px;color:var(--alarm);display:block;margin-bottom:1px}
+.nextEv{display:block;margin-top:5px;font-family:var(--body);font-size:12px;font-weight:400;color:#f0b6a6}
+#tcA{font-size:10.5px;letter-spacing:.06em;color:#c3cbcc}#tcA i{font-style:normal;color:var(--alarm)}
+video.ins{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;opacity:0;pointer-events:none;background:#000;filter:contrast(1.1)}
+video.ins.on{opacity:1}
+#liveWait{pointer-events:auto}
+#lwMsgs{max-height:52vh;overflow:hidden;justify-content:flex-end}
+#lwChips{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+#lwChips button{background:rgba(16,34,28,.84);border:1px solid var(--line);border-radius:999px;color:#eef2f1;font-size:13px;padding:7px 12px;cursor:pointer;text-align:left}
+#lwSay{display:flex;gap:8px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.55);padding:3px 3px 3px 12px}
+#lwSay input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:#fff;font:inherit;font-size:15px;padding:8px 0}
+#lwSay button{border:0;border-radius:9px;background:rgba(255,255,255,.14);color:#fff;font-size:13px;padding:0 12px;cursor:pointer}
+#pad{position:absolute;inset:0;z-index:9;background:rgba(3,5,6,.93);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
+#pad h3{margin:0;font-family:var(--display);font-size:26px;font-weight:600;text-transform:uppercase;color:#fff}
+#pad p{margin:0;max-width:30ch;text-align:center;font-size:13.5px;line-height:1.45;color:#c8cfce}
+#padShow{font-family:var(--mono);font-size:30px;letter-spacing:.34em;color:var(--direct);min-height:40px}
+#padShow.bad{color:var(--alarm);animation:shake .38s linear 1}
+#padKeys{display:grid;grid-template-columns:repeat(3,68px);gap:8px}
+#padKeys button{height:56px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);font-family:var(--mono);font-size:21px;color:#fff;cursor:pointer}
+#padBtn{min-height:50px;border:1px solid var(--relay);color:#ffe2b0;background:rgba(40,26,6,.8);border-radius:12px;font-weight:600;cursor:pointer}
+#mid{position:absolute;inset:0;z-index:8;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px}
+#midT{font-family:var(--mono);font-size:64px;color:var(--alarm);font-variant-numeric:tabular-nums}
+#midS{font-size:15px;color:#e1e6e5;line-height:1.5;max-width:30ch}
+#fakeUI{position:absolute;left:18px;right:18px;bottom:calc(30px + env(safe-area-inset-bottom,0px));z-index:7;display:flex;flex-direction:column;gap:10px}
+#fakeUI p{margin:0;font-size:15px;line-height:1.4;color:#fff;text-shadow:0 1px 4px #000;text-align:center}
+#fakeIn{position:absolute;inset:0;z-index:8;background:#050708;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px}
+#fakeIn img{width:96px;height:96px;border-radius:50%;object-fit:cover;animation:rec 1.2s infinite}
+#fakeIn b{font-family:var(--display);font-size:30px;font-weight:600;color:#fff}
+#fakeIn span{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.gal{display:flex;flex-direction:column;gap:3px;font-size:13px;color:#7f898b}
+.gal .got{color:#f4f6f5}.gal .now{color:var(--relay)}
+.miss{font-size:13px;line-height:1.5;color:#e2c79c}
+#endCard{overflow:auto;justify-content:flex-start}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 body.lang-en .zh{display:none!important}
 /* V2 暗调和恐怖手法：统一压暗、暗角、颗粒；选择点极慢推近；信号断、灯闪、震动都是页面做的 */
 video.v{filter:contrast(1.12) saturate(.78) brightness(.9);transform:scale(1);transition:none}
-body.choosing video.v.on,body.waiting video.v.on{transform:scale(1.06);transition:transform 45s linear}
+body.choosing video.v.on,body.waiting video.v.on{transform:scale(1.03);transition:transform 45s linear}
 #grade{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,transparent 38%,rgba(0,0,0,.62) 100%)}
 #grade::after{content:"";position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
 #black{position:absolute;inset:0;z-index:3;background:#000;opacity:0;pointer-events:none;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:#7c8689}
@@ -194,25 +241,33 @@ body.start #tc{display:none}
     <button id="mLang"><span>Interface language</span><small id="mLangV"></small></button>
     <button id="mRestart"><span>Restart from the opening</span></button>
   </nav>
-  <div id="tc" hidden><span id="tcT"></span><b id="tcL" hidden></b></div>
+  <div id="tc" hidden><span id="tcT"></span><b id="tcL" hidden></b><span id="tcA" hidden></span></div>
+  <div id="evt" hidden></div>
   <div id="lt" hidden></div>
   <div id="liveChip" hidden></div>
   <div id="bubbles" aria-live="polite"></div>
   <div id="ev" hidden></div>
-  <div id="pip" hidden><div>CENTER RELAY · LIVE?</div><video id="pipV" playsinline muted loop preload="none"></video></div>
+  <div id="pip" hidden><div id="pipL">CENTER RELAY · LIVE?</div><video id="pipV" playsinline muted loop preload="none"></video></div>
   <div id="subs" aria-live="polite"></div>
   <section id="sheet" aria-label="Your move">
     <div class="task" id="task"></div>
     <div class="cue" id="cue"></div>
+    <button id="padBtn" type="button" hidden></button>
     <button class="opt" id="optA"></button>
     <button class="opt" id="optB"></button>
+    <button class="opt" id="optC" hidden></button>
     <form id="say" autocomplete="off">
       <input id="sayIn" maxlength="120" data-en-ph="Or tell Lena what to do…" data-zh-ph="或者，直接告诉 Lena 怎么做…" aria-label="Tell Lena what to do">
       <button id="sayBtn" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
     </form>
     <div class="rowline"><span class="rno" id="rno"></span><button class="link" id="feedBtn" type="button"></button><button class="link" id="hintBtn" type="button"></button><button class="link" id="replayBtn" type="button" hidden></button></div>
   </section>
-  <div id="liveWait" hidden><div class="her" id="lwH"></div><div id="lwMsgs"></div><div class="s" id="lwS"></div><div class="t"><span id="lwT">0.0</span>s</div></div>
+  <div id="liveWait" hidden><div id="lwMsgs"></div><div id="lwChips"></div><form id="lwSay" autocomplete="off"><input id="lwIn" maxlength="100" data-en-ph="Text Lena…" data-zh-ph="给 Lena 发消息…"><button type="submit" data-en="Send" data-zh="发送"></button></form><div class="s" id="lwS"></div><div class="t" id="lwTbox" hidden><span id="lwT">0.0</span>s</div></div>
+  <section id="tip" hidden><div class="h" id="tipH"></div><div id="tipMsgs"></div><div class="tl" id="tipTL" hidden></div><button class="cta" id="tipGo" hidden></button></section>
+  <section id="pad" hidden><h3 id="padT"></h3><p id="padHint"></p><div id="padShow"></div><div id="padKeys"></div><button class="link" id="padClose" type="button"></button></section>
+  <section id="mid" hidden><div id="midT"></div><div id="midS"></div></section>
+  <section id="fakeIn" hidden><img src="media/av_lena.jpg" alt=""><b>Lena</b><span id="fakeInS"></span><button class="cta" id="fakeOk" data-en="Answer" data-zh="接听"></button></section>
+  <section id="fakeUI" hidden><p id="fakeQ"></p><button class="opt" id="fakeTest"></button><button class="link" id="fakeHang" type="button"></button></section>
   <section id="coach" hidden></section>
   <section class="card" id="startCard">
     <div class="kicker" data-en="Live interactive mystery" data-zh="实时互动悬疑"></div>
@@ -223,12 +278,15 @@ body.start #tc{display:none}
     <button class="cta" id="startBtn" data-en="Pick up" data-zh="接通"></button>
   </section>
   <section class="card" id="endCard" hidden>
-    <div class="kicker" data-en="Case closed" data-zh="结案"></div>
+    <div class="kicker" id="endK"></div>
     <h1 id="endT"></h1>
     <p id="endEn"></p><p class="zh" id="endZh"></p>
+    <div class="miss" id="endMiss"></div>
+    <div class="gal" id="endGal"></div>
     <div class="meta" id="endMeta"></div>
+    <button class="cta" id="endAgain"></button>
+    <button class="cta ghost" id="endBack" hidden></button>
     <button class="cta ghost" id="endFile" data-en="Open the case file" data-zh="打开案卷"></button>
-    <button class="cta" id="endAgain" data-en="Try another way" data-zh="换一种查法"></button>
   </section>
   <aside id="drawer" hidden aria-label="Case file">
     <div class="dh"><h2 id="dTitle"></h2><button class="icon" id="dClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="#e8e8e8" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
@@ -244,14 +302,14 @@ const Q = new URLSearchParams(location.search), K = Q.get('k') || '', MODE = 'au
 const PAGES = location.hostname.endsWith('github.io');
 let API = location.origin;
 const relayReady = PAGES ? fetch('relay.json?t=' + Date.now(), {cache: 'no-store'}).then(r => r.json()).then(j => { API = j.url; }) : Promise.resolve();
-const CDN = /*CDN*/{"media/OPEN.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/c52f2340fa9d4551aeeb448e7524ebfe/OPEN.mp4", "media/IDLE0.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/2df0d20f748a487c9b11385384889759/IDLE0.mp4", "media/clip.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/50bbf23ad0df43469316ead0543ac3c8/clip.mp4", "media/poster.jpg": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/d3158726760c482dba1594ccac05c560/poster.jpg", "audio/investigate.mp3": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/f388b6039f2d42918fc22685f4a06287/investigate.mp3", "audio/wait.mp3": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/eca7ae57e1d14939b59637c1f2288fd6/wait.mp3"}/*END*/;
+const CDN = /*CDN*/{"media/OPEN.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/c52f2340fa9d4551aeeb448e7524ebfe/OPEN.mp4", "media/IDLE0.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/2df0d20f748a487c9b11385384889759/IDLE0.mp4", "media/clip.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/50bbf23ad0df43469316ead0543ac3c8/clip.mp4", "media/poster.jpg": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/d3158726760c482dba1594ccac05c560/poster.jpg", "audio/investigate.mp3": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/f388b6039f2d42918fc22685f4a06287/investigate.mp3", "audio/wait.mp3": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/eca7ae57e1d14939b59637c1f2288fd6/wait.mp3", "media/END_FAKE.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/275245b8a9384f049c467ac59ad5d274/END_FAKE.mp4", "media/END_TEST.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/5907011cd32a4471b0b5768afe0ba2a4/END_TEST.mp4", "media/clip_confess.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/1d99e8e0d2d9481cac12cf107a8fc25e/clip_confess.mp4", "media/ins_hollis.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/ae37165d9a9d4cf2b8c8f91218c61e37/ins_hollis.mp4", "media/ins_voss.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/f0eee42bbe344a58a57f5ed28576d322/ins_voss.mp4", "media/ins_fake.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/69d7fdc0f6c5473bbb3d88137ba1261d/ins_fake.mp4"}/*END*/;
 const SRC = p => PAGES && CDN[p] ? CDN[p] : p;
-const PREVIEW_NEXT = /*NEXT*/{"cue": {"zh": "门把手还在响。她要你先确认：屏幕上这个人，是现在的她吗？", "en": "The handle's still moving. She needs you to check: is this really her, right now?"}, "A": {"zh": "让她举两根手指，说“蓝伞”", "en": "Have her raise two fingers and say \"blue umbrella\"", "cost": {"zh": "转播做不到这件事。假的一试就露馅", "en": "The feed can't fake a brand-new move"}, "leads_to": "K01：她当场做到，转播还在放推杯子"}, "B": {"zh": "保存两段转播，逐帧对照", "en": "Save both feed clips and compare them", "cost": {"zh": "留下证据，但门外的人还在试门", "en": "You keep proof, but the door is still being tried"}, "leads_to": "K01：两段完全相同，她说她今晚没碰过杯子"}}/*END*/;
+const PREVIEW_NEXT = /*NEXT*/{"cue": {"zh": "门把手还在响。Lena 不知道午夜的事，也不知道你收到了什么。", "en": "The handle's still moving. Lena doesn't know about midnight, or what you were sent."}, "A": {"zh": "Lena，举两根手指，说“蓝伞”", "en": "Lena, raise two fingers and say \"blue umbrella\"", "cost": {"zh": "先确认是真的她。假的转播做不到这个", "en": "Check it's really her. A fake can't do this"}, "leads_to": "K01：她当场做到，转播还在放推杯子"}, "B": {"zh": "Lena，听我说：午夜这层会放气，你得出去", "en": "Lena, listen: gas fires on your floor at midnight. Get out", "cost": {"zh": "抢时间。但你还没确认这是真的她", "en": "Saves time. But you haven't checked it's really her"}, "leads_to": "她追问你怎么知道；K02 提前"}}/*END*/;
 const pool = [$('va'), $('vb'), $('vc')]; let front = pool[0];
 // 声音引擎：环境底噪、配乐、音效分层，都能闪避（WebAudio，在“接通”那一下解锁）
 const AE = (() => {
   let ctx = null, master, bedG, bgmG, sfxG; const buf = {}; let bed = null, bedId = null, bgm = null, bgmId = null, bedV = .45, bgmV = .24;
-  const IDS = ['amb_room', 'amb_stair', 'amb_vault', 'amb_ops', 'amb_dock', 'sub_drone', 'riser', 'stinger', 'door_bang', 'handle', 'latch', 'keys', 'steps', 'power_down', 'flicker', 'static', 'heartbeat', 'breath', 'hiss', 'alarm', 'cam_servo', 'scratch', 'msg_buzz', 'ui_evidence', 'pa_midnight', 'pa_ten', 'pa_one'];
+  const IDS = ['pa_side', 'pa_vent', 'amb_room', 'amb_stair', 'amb_vault', 'amb_ops', 'amb_dock', 'sub_drone', 'riser', 'stinger', 'door_bang', 'handle', 'latch', 'keys', 'steps', 'power_down', 'flicker', 'static', 'heartbeat', 'breath', 'hiss', 'alarm', 'cam_servo', 'scratch', 'msg_buzz', 'ui_evidence', 'pa_midnight', 'pa_ten', 'pa_one'];
   const url = id => ['dread', 'pressure', 'reveal', 'wait'].includes(id) ? `audio/${id}.mp3` : `audio/sfx/${id}.mp3`;
   const load = id => buf[id] || (buf[id] = fetch(url(id)).then(r => r.arrayBuffer()).then(a => ctx.decodeAudioData(a)).catch(() => null));
   const ramp = (g, v, t) => { const n = ctx.currentTime; g.gain.cancelScheduledValues(n); g.gain.setValueAtTime(g.gain.value, n); g.gain.linearRampToValueAtTime(v, n + t); };
@@ -267,13 +325,15 @@ const AE = (() => {
   };
 })();
 const waitMusic = on => { if (on) AE.bgm('wait', .3); };
-const BED = {'放映室': 'amb_room', '楼梯间': 'amb_stair', '封存库': 'amb_vault', '控制室': 'amb_ops', '装卸口': 'amb_dock'};
-let place = '放映室', clock = -36, midKnown = false; const clockStr = m => { const h = m < 0 ? 23 : 0, mm = m < 0 ? 60 + m : m; return `${String(h).padStart(2, '0')}:${String(mm).padStart(2, '0')}`; };
+const BED = {'放映室': 'amb_room', '楼梯间': 'amb_stair', '封存库': 'amb_vault', '控制室': 'amb_ops', '装卸口': 'amb_dock', '楼外': 'amb_dock'};
+const DEBUG = Q.has('debug'); let alertN = 0, puzzle = null, STORY = {tip: [], timeline: [], endings: {}}, ckpts = [], memOpt = null;
+const STORE = 'dttf_v3'; const mem = (() => { try { return JSON.parse(localStorage.getItem(STORE)) || {runs: 0, endings: [], known: []}; } catch (e) { return {runs: 0, endings: [], known: []}; } })(); const memSave = () => { try { localStorage.setItem(STORE, JSON.stringify(mem)); } catch (e) {} };
+let place = '放映室', clock = -36, midKnown = true; const clockStr = m => { const h = m < 0 ? 23 : 0, mm = m < 0 ? 60 + m : m; return `${String(h).padStart(2, '0')}:${String(mm).padStart(2, '0')}`; };
 const LANGQ = (Q.get('lang') || '').toLowerCase();
 let lang = LANGQ.startsWith('zh') ? 'zh' : LANGQ.startsWith('en') ? 'en' : (/^zh/i.test(navigator.language || '') ? 'zh' : 'en');
 const T = (en, zh) => lang === 'zh' ? zh : en;
-RT.init({drama: 'dont-trust-this-feed', zh: () => lang === 'zh', ignore: '#drawer,#endCard,#ev,#pip,#coach,#lt'});
-let UI = null, EV = {}; const uiReady = Promise.all([fetch('open_ui.json').then(r => r.json()).then(j => UI = j), fetch('evidence.json').then(r => r.json()).then(j => { (j.evidence || j).forEach(e => EV[e.id] = e); QS = j.questions || []; })]);
+RT.init({drama: 'dont-trust-this-feed', zh: () => lang === 'zh', ignore: '#drawer,#endCard,#ev,#pip,#coach,#lt,#tip,#pad,#mid,#fakeIn,#fakeUI,#liveWait'});
+let UI = null, EV = {}; const uiReady = Promise.all([fetch('open_ui.json').then(r => r.json()).then(j => UI = j), fetch('evidence.json').then(r => r.json()).then(j => { (j.evidence || j).forEach(e => EV[e.id] = e); QS = j.questions || []; STORY = j; })]);
 let next = null;
 const applyLang = () => {
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'; document.body.classList.toggle('lang-en', lang === 'en');
@@ -282,7 +342,7 @@ const applyLang = () => {
   $('dTitle').textContent = T('Case file', '案卷');
   $('hintBtn').textContent = T('Lost? Open the case board', '没跟上？看案件板');
   $('feedBtn').textContent = T('Check center feed', '看中心转播');
-  $('brief').innerHTML = T('<div><b>WHO YOU ARE</b>Lena\'s remote partner. You\'re outside. She\'s not.</div><div><b>WHAT YOU DO</b>Tell her what to do. Tap a choice, or type anything. She hears you.</div><div><b>WHY IT MATTERS</b>You\'ll see things she can\'t.</div>', '<div><b>你是谁</b>Lena 的远程搭档。你在楼外，她出不来。</div><div><b>你能做什么</b>告诉她怎么做。点选项，或者打任何话，她都听得到。</div><div><b>为什么是你</b>有些东西只有你看得见。</div>');
+  $('brief').innerHTML = T('<div><b>WHO YOU ARE</b>Lena\'s remote partner. You\'re outside. She\'s not.</div><div><b>YOUR GOAL</b>Before 00:00, get her out of the building, with proof of who did this.</div><div><b>YOUR EDGE</b>Someone just told you what she doesn\'t know.</div>', '<div><b>你是谁</b>Lena 楼外唯一的搭档。</div><div><b>你的目标</b>00:00 之前把她带出大楼，带上能指认那个人的证据。</div><div><b>你的优势</b>有人刚告诉了你她不知道的事。</div>');
   document.querySelectorAll('[data-en-ph]').forEach(el => el.placeholder = lang === 'zh' ? el.dataset.zhPh : el.dataset.enPh);
   $('mLangV').textContent = lang === 'en' ? 'English' : 'Chinese';
   if (next && document.body.classList.contains('choosing')) fillChoice();
@@ -293,7 +353,7 @@ const dual = o => o ? `${esc(o.en)}<span class="zh">${esc(o.zh)}</span>` : '';
 const setMode = m => { document.body.classList.remove('start', 'choosing', 'playing', 'waiting'); document.body.classList.add(m); AE.pause(false); if (m !== 'start') $('tc').hidden = false; };
 setMode('start');
 $('stage').style.background = '#000 url(media/poster.jpg) center/cover';
-const chip = $('liveChip'); const setChip = h => { chip.innerHTML = h; chip.hidden = !h; };
+const chip = $('liveChip'); const setChip = h => { if (!DEBUG && h && !/^<b>(Wrong|Vivix|Not sent|This scene|No options|Could not|Preview|Live generation offline)/.test(h)) h = ''; chip.innerHTML = h; chip.hidden = !h; };
 function toast(t){ const el = $('toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 2200); }
 const subs = $('subs');
 function showSub(c){ if (!c){ subs.innerHTML = ''; return; } const who = c.who && (c.who === 'Unknown' ? T('Unknown', '未知说话者') : c.who); subs.innerHTML = (who ? `<div class="who">${esc(who)}</div>` : '') + `<div class="en">${esc(c.en)}</div>` + (c.zh ? `<div class="zh">${esc(c.zh)}</div>` : ''); }
@@ -317,7 +377,7 @@ const WHO = {Voss: () => ({n: 'Adrian Voss', r: T('Head of operations. He runs t
 let seenWho = new Set();
 function introWho(w){ if (!WHO[w] || seenWho.has(w)) return; seenWho.add(w); const x = WHO[w](), el = $('lt'); el.innerHTML = `<b>${esc(x.n)}</b><span>${esc(x.r)}</span>`; el.hidden = false; clearTimeout(introWho.t); introWho.t = setTimeout(() => el.hidden = true, 4200); }
 let tcBase = 0, tcAt = 0;
-function tcTick(){ const nowT = Date.now(); if (tcAt && document.body.classList.contains('playing') && !front.paused) tcBase += (nowT - tcAt) / 1000; tcAt = nowT; const sec = tcBase, m = 23 * 60 + 24 + Math.floor(sec / 60) + (clock + 36), ss = Math.floor(sec % 60); const mm = m % (24 * 60); $('tcT').textContent = `● ${String(Math.floor(mm / 60)).padStart(2, '0')}:${String(mm % 60).padStart(2, '0')}:${String(ss).padStart(2, '0')}`; const L = $('tcL'); if (midKnown){ L.hidden = false; const left = -clock; L.textContent = left > 0 ? T(`${left} MIN TO MIDNIGHT`, `离午夜 ${left} 分钟`) : T('MIDNIGHT', '午夜已到'); L.classList.toggle('hot', left <= 10); } else L.hidden = true; }
+function tcTick(){ const nowT = Date.now(); if (tcAt && document.body.classList.contains('playing') && !front.paused) tcBase += (nowT - tcAt) / 1000; tcAt = nowT; const sec = tcBase, m = 23 * 60 + 24 + Math.floor(sec / 60) + (clock + 36), ss = Math.floor(sec % 60); const mm = m % (24 * 60); $('tcT').textContent = `● ${String(Math.floor(mm / 60)).padStart(2, '0')}:${String(mm % 60).padStart(2, '0')}:${String(ss).padStart(2, '0')}`; const L = $('tcL'); if (midKnown){ L.hidden = false; const left = -clock; L.textContent = left > 0 ? T(`GAS IN ${left} MIN`, `距放气 ${left} 分钟`) : T('GAS FIRING', '放气中'); L.classList.toggle('hot', left <= 10); } else L.hidden = true; const A = $('tcA'); A.hidden = !(alertN > 0); A.innerHTML = 'VOSS <i>' + '●'.repeat(alertN) + '</i>' + '○'.repeat(Math.max(0, 3 - alertN)); }
 setInterval(tcTick, 500);
 setInterval(() => { if (document.body.classList.contains('playing')) AE.pause(!!front.paused && !$('liveWait').hidden === false && front.currentTime > 0 && !front.ended); }, 300);
 // 恐怖手法：页面实现，和画面按拍对齐
@@ -328,7 +388,18 @@ function fxRun(x){ const B = $('black'), st = $('stage');
   else if (x.type === 'stinger'){ AE.duck(false, .05); AE.play('stinger', 1); st.classList.remove('shake'); void st.offsetWidth; st.classList.add('shake'); if (navigator.vibrate) navigator.vibrate([90, 40, 60]); }
   else if (x.type === 'shake'){ st.classList.remove('shake'); void st.offsetWidth; st.classList.add('shake'); if (navigator.vibrate) navigator.vibrate(90); }
   else if (x.type === 'heartbeat'){ AE.play('heartbeat', .8); }
+  else if (x.type === 'insert') cutIn(x);
+  else if (x.type === 'smash'){ front.volume = 0; AE.duck(true, .02); B.textContent = ''; B.classList.add('on'); smashed = true; }
 }
+// 插入镜头：远景之后硬切贴脸特写。底下的视频继续走，切回来时人已经到了身边
+let smashed = false; const INS = {};
+function loadInserts(){ ['ins_hollis', 'ins_voss', 'ins_fake'].forEach(id => { if (INS[id]) return; const v = document.createElement('video'); v.className = 'ins'; v.muted = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto'; v.src = SRC(`media/${id}.mp4`); $('stage').appendChild(v); INS[id] = v; v.load(); }); }
+function cutIn(x){ const v = INS[x.id], st = $('stage'); const hit = () => { if (!x.hard) return; AE.duck(false, .03); AE.play('stinger', 1); st.classList.remove('shake'); void st.offsetWidth; st.classList.add('shake'); if (navigator.vibrate) navigator.vibrate([120, 40, 80]); };
+  if (!v || v.readyState < 2){ hit(); return; }
+  const f0 = front; if (x.hard) f0.volume = 0; v.currentTime = 0; v.classList.add('on'); hit(); v.play().catch(() => {}); if (!x.hard) AE.play('static', .35);
+  setTimeout(() => { v.classList.remove('on'); v.pause(); if (x.hard) f0.volume = 1; }, (x.dur || 1) * 1000); }
+function evtShow(e){ const el = $('evt'); el.innerHTML = `<time>${clockStr(e.m)}</time>${esc(T(e.en, e.zh))}`; el.hidden = false; AE.play('msg_buzz', .4); clearTimeout(evtShow.t); evtShow.t = setTimeout(() => el.hidden = true, 5000); }
+function tlHtml(){ const nx = STORY.timeline.find(e => e.m > clock); return STORY.timeline.map(e => `<div class="${e.m <= clock ? 'past' : e === nx ? 'nx' : e.m === 0 ? 'zero' : ''}"><time>${clockStr(e.m)}</time><span>${esc(T(e.en, e.zh))}</span></div>`).join(''); }
 function bubble(who, c, you){ const el = document.createElement('div'); el.className = 'bub' + (you ? ' you' : ''); el.innerHTML = `<small>${esc(who)}</small>${esc(c.en)}${c.zh && c.zh !== c.en ? `<span class="zh">${esc(c.zh)}</span>` : ''}`; $('bubbles').appendChild(el); setTimeout(() => el.remove(), 4200); }
 
 // 案卷：证据只有这些原文，来自资料包；画面里没有字
@@ -336,14 +407,17 @@ let held = [], goal = null;
 function evCardHtml(e, kicker){ return `<div class="ek">${esc(kicker)}</div><div class="et">${esc(T(e.title.en, e.title.zh))}</div><div class="ef">${dual(e.fact)}</div><div class="el">${dual(e.limit)}</div>`; }
 function gain(id, quiet){ if (!EV[id] || held.includes(id)) return; held.push(id); if (id === 'E03') verified = true; if (id === 'E14') midKnown = true; $('caseN').textContent = held.length; $('caseBtn').hidden = false; if (quiet) return; const b = $('caseBtn'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
   AE.play('ui_evidence', .6); const el = $('ev'); el.innerHTML = evCardHtml(EV[id], T('New evidence · ' + id, '新证据 · ' + id)); el.hidden = false; clearTimeout(gain.t); gain.t = setTimeout(() => el.hidden = true, id === 'E01' ? 3000 : 5200); }
-function showPip(d){ const v = $('pipV'); if (!v.src) v.src = SRC('media/clip.mp4'); v.currentTime = 0; v.play().catch(() => {}); $('pip').hidden = false; document.body.classList.add('haspip'); clearTimeout(showPip.t); showPip.t = setTimeout(() => { $('pip').hidden = true; document.body.classList.remove('haspip'); v.pause(); }, d * 1000); }
+function showPip(d, clip){ const v = $('pipV'), want = SRC(clip === 'confess' ? 'media/clip_confess.mp4' : 'media/clip.mp4'); if (v.dataset.src !== want){ v.dataset.src = want; v.src = want; } v.muted = clip !== 'confess'; $('pipL').textContent = clip === 'confess' ? T('CENTER RELAY · WHOLE BUILDING', '中心转播 · 全楼在看') : 'CENTER RELAY · LIVE?'; v.loop = clip !== 'confess'; v.currentTime = 0; v.play().catch(() => { v.muted = true; v.play().catch(() => {}); }); $('pip').hidden = false; document.body.classList.add('haspip'); clearTimeout(showPip.t); showPip.t = setTimeout(() => { $('pip').hidden = true; document.body.classList.remove('haspip'); v.pause(); }, d * 1000); }
 let recap = null, QS = [], people = {voss: false, hollis: false, unk: false};
-const FLOORS = [['1F', [['控制室', 'Control room'], ['装卸口', 'Loading dock · exit']]], ['B2', [['放映室', 'Screening room'], ['楼梯间', 'Stairwell']]], ['B3', [['封存库', 'Sealed vault']]]];
+const FLOORS = [['OUT', [['楼外', 'Outside']]], ['1F', [['控制室', 'Control room'], ['装卸口', 'Loading dock · exit']]], ['B2', [['放映室', 'Screening room'], ['楼梯间', 'Stairwell']]], ['B3', [['封存库', 'Sealed vault']]]];
 function renderCase(){
   const L = $('dList'); let h = '';
+  const G = [[T('Get Lena out of the building', '把 Lena 带出大楼'), place === '楼外'], [T('Proof of what she found', '她查到的东西（证据）'), held.includes('E09')], [T('Proof of who did it', '指认那个人的记录'), held.includes('E13')]];
+  h += `<div class="sec" style="margin-top:0">${esc(T('Win by 00:00', '00:00 前要做到'))}</div>` + G.map(([x, d]) => `<div class="q${d ? ' done' : ''}"><i>${d ? '●' : '○'}</i><span>${esc(x)}</span></div>`).join('');
   if (goal) h += `<div class="dtask"><div class="ek">${esc(T('Do this now', '现在要做'))}</div>${dual(goal)}</div>`;
+  h += `<div class="sec">${esc(T('Tonight', '今晚时间线'))} · ${esc(clockStr(clock))}</div><div class="tl">${tlHtml()}</div>`;
   if (recap) h += `<div class="dtask" style="border-color:rgba(255,255,255,.14)"><div class="ek" style="color:var(--mute)">${esc(T('So far', '目前局面'))}</div>${dual(recap)}</div>`;
-  h += `<div class="sec">${esc(T('Where she is', 'Lena 在哪'))}</div><div class="floors">` + FLOORS.map(([f, rs]) => `<div class="floor"><em>${f}</em><div>` + rs.map(([z, en]) => { const here = z === place, known = visited.has(z) || z === '放映室' || z === '楼梯间' || z === '装卸口'; return `<div class="room${here ? ' here' : ''}${known ? '' : ' lock'}">${known ? esc(T(en, z)) : '?'}${here ? ' ●' : ''}</div>`; }).join('') + '</div></div>').join('') + '</div>';
+  h += `<div class="sec">${esc(T('Where she is', 'Lena 在哪'))}</div><div class="floors">` + FLOORS.map(([f, rs]) => `<div class="floor"><em>${f}</em><div>` + rs.map(([z, en]) => { const here = z === place, known = visited.has(z) || z === '放映室' || z === '楼梯间' || z === '装卸口' || z === '楼外'; return `<div class="room${here ? ' here' : ''}${known ? '' : ' lock'}">${known ? esc(T(en, z)) : '?'}${here ? ' ●' : ''}</div>`; }).join('') + '</div></div>').join('') + '</div>';
   h += `<div class="sec">${esc(T('What we need to find out', '要查清的事'))}</div>` + QS.map(q => { const hit = q.need.filter(x => held.includes(x)).length, done = q.any ? hit > 0 : hit === q.need.length, part = !done && hit > 0; return `<div class="q${done ? ' done' : part ? ' part' : ''}"><i>${done ? '●' : part ? '◐' : '○'}</i><span>${esc(T(q.q.en, q.q.zh))}</span></div>`; }).join('');
   h += `<div class="sec">${esc(T('People', '人物'))}</div><div class="pp"><img src="media/av_lena.jpg" alt=""><p><b>Lena Hart</b>${esc(T('Archive clerk, locked in B2. Your partner.', '档案整理员，被锁在地下二层。你的搭档。'))}</p></div>`;
   if (seenWho.has('Voss')) h += `<div class="pp"><img src="media/av_voss.jpg" alt=""><p><b>Adrian Voss</b>${esc(T('Head of operations. Very polite. Keeps asking if you saved it.', '运维负责人。很礼貌。总问你存了没有。'))}</p></div>`;
@@ -375,14 +449,19 @@ async function api(path, body){ await relayReady; const r = await fetch(API + pa
   .catch(e => setChip(e.message === 'nokey' ? '<b>Preview</b> · opening only; live scenes need the test link with a key' : '<b>Live generation offline</b> · the relay on the Mac is not reachable right now'));
 
 const ov = pool[1]; load(ov, SRC('media/OPEN.mp4')); const idle = pool[2]; load(idle, SRC('media/IDLE0.mp4'), true);
-async function startSession(){ held = []; goal = null; recap = null; verified = false; closed = null; place = '放映室'; clock = -36; midKnown = false; seenWho = new Set(); visited.clear(); visited.add('放映室'); tcBase = 0; tcAt = Date.now(); $('caseN').textContent = '0'; $('caseBtn').hidden = true; if (!K){ next = PREVIEW_NEXT; return; } const j = await api('/api/session', {mode: MODE, name: viewerName}); sid = j.sid; next = j.next; round = 0; }
+async function startSession(withMem){ held = []; goal = null; recap = null; verified = false; closed = null; place = '放映室'; clock = -36; midKnown = true; alertN = 0; puzzle = null; ckpts = []; memOpt = null; loadInserts(); seenWho = new Set(); visited.clear(); visited.add('放映室'); tcBase = 0; tcAt = Date.now(); $('caseN').textContent = '0'; $('caseBtn').hidden = true; if (!K){ next = PREVIEW_NEXT; return; } next = null; const j = await api('/api/session', {mode: MODE, name: viewerName, memory: withMem && mem.runs ? {runs: mem.runs, last: mem.last, known: mem.known} : undefined, clock: Q.get('clock') ? parseInt(Q.get('clock'), 10) : undefined}); sid = j.sid; next = j.next; round = 0; if (j.clock != null) clock = j.clock; }
 $('startBtn').onclick = async () => {
   viewerName = $('nameIn').value.trim(); AE.unlock();
-  $('startCard').hidden = true; setMode('playing');
+  $('startCard').hidden = true; setMode('playing'); $('tc').hidden = true;
   [pool[0], idle].forEach(v => { const p = v.play(); if (p) p.then(() => { if (v !== front) v.pause(); }).catch(() => {}); });
   startSession().catch(e => setChip('<b>Could not start</b> · ' + esc(e.message)));
-  await uiReady; playOpening();
+  await uiReady; if (mem.runs || Q.has('notip')){ $('tc').hidden = false; playOpening(); } else showTip();
 };
+// 内幕：接通之前，观众先看到桌下的炸弹（编导课第 9 课）。Lena 不知道这些
+function showTip(){ const box = $('tipMsgs'), S = $('tip'); S.hidden = false; box.innerHTML = ''; $('tipH').textContent = T('UNKNOWN NUMBER · 23:21', '未知号码 · 23:21'); AE.bgm('wait', .2); let i = 0, stop = false;
+  const go = () => { if (stop) return; if (i >= STORY.tip.length){ stop = true; const tl = $('tipTL'); tl.innerHTML = `<div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mute)">${esc(T('TONIGHT', '今晚'))}</div>` + STORY.timeline.filter(e => e.m === -18 || e.m === -12 || e.m === 0).map(e => `<div class="${e.m === 0 ? 'zero' : ''}"><time>${clockStr(e.m)}</time><span>${esc(T(e.en, e.zh))}</span></div>`).join(''); tl.hidden = false; const b = $('tipGo'); b.textContent = T('Lena is calling. Pick up', 'Lena 在呼叫你。接通'); b.hidden = false; S.onclick = null; b.onclick = () => { S.hidden = true; $('tc').hidden = false; playOpening(); }; AE.play('msg_buzz', .6); return; }
+    const m = STORY.tip[i++], el = document.createElement('div'); el.className = 'bub'; el.innerHTML = lang === 'zh' ? `<span class="zh" style="margin:0">${esc(m.zh)}</span>` : esc(m.en); box.appendChild(el); AE.play('msg_buzz', .5); go.t = setTimeout(go, 2300); };
+  S.onclick = () => { if (i < STORY.tip.length || !stop){ clearTimeout(go.t); go(); } }; go.t = setTimeout(go, 500); }
 let replayFn = null;
 function playOpening(){
   showSub(null); ov.currentTime = 0; ov.muted = false; ov.loop = false; const fired = new Set();
@@ -394,8 +473,11 @@ function playOpening(){
     (UI.fx || []).forEach((x, i) => { if (t >= x.at && !fired.has('fx' + i)){ fired.add('fx' + i); fxRun(x); } }); };
   ov.onended = () => { RT.done('OPEN'); RT.clear(); ov.ontimeupdate = null; idle.currentTime = 0; idle.play().catch(() => {}); show(idle); setSrc('direct'); AE.bed('amb_room', .45); openChoice(); if (!coachDone) showCoach(); };
 }
-$('mRestart').onclick = () => { AE.unlock(); AE.bed(null); AE.bgm(null); $('menu').hidden = true; replayFn = null; closeChoice(); $('liveWait').hidden = true; $('endCard').hidden = true; liveRun++; busy = false; setMode('playing'); startSession().catch(() => {}); load(idle, SRC('media/IDLE0.mp4'), true); playOpening(); };
-$('endAgain').onclick = () => $('mRestart').click();
+$('mRestart').onclick = () => { AE.unlock(); AE.bed(null); AE.bgm(null); $('menu').hidden = true; replayFn = null; closeChoice(); $('liveWait').hidden = true; $('endCard').hidden = true; $('tip').hidden = true; liveRun++; busy = false; setMode('playing'); startSession(true).catch(() => {}); load(idle, SRC('media/IDLE0.mp4'), true); playOpening(); };
+// 带着记忆重来：不看开场，直接回到第一个选择点；第三个选项是上一局才知道的事
+$('endAgain').onclick = () => { AE.unlock(); AE.duck(false); $('endCard').hidden = true; replayFn = null; closeChoice(); liveRun++; busy = false; setMode('playing'); startSession(true).catch(() => {}); load(idle, SRC('media/IDLE0.mp4'), true); idle.currentTime = 0; idle.play().catch(() => {}); show(idle); setSrc('direct'); AE.bed('amb_room', .45); gain('E01', true);
+  memOpt = mem.known.includes('E09') ? {zh: 'Lena，我知道你身上有 U 盘。别瞒了，现在就走', en: "Lena, I know about the USB stick. Stop hiding it. Go now"} : mem.known.includes('E08') ? {zh: 'Lena，走侧门下楼，楼下那个有钥匙的人不是敌人', en: "Lena, take the side door. The man with the keys isn't the enemy"} : {zh: 'Lena，别管门了，午夜这层会放气，马上走侧门', en: 'Lena, forget the door. Gas fires at midnight. Side door, now'}; openChoice(); };
+$('endBack').onclick = async () => { const c = $('endBack').dataset; $('endBack').disabled = true; try { const j = await api('/api/rewind', {sid, round: parseInt(c.round, 10)}); $('endCard').hidden = true; round = j.round; next = j.next; clock = j.clock; place = j.place; alertN = j.alert || 0; puzzle = j.puzzle; goal = j.goal || goal; recap = j.recap || recap; closed = null; held = j.evidence.slice(); ckpts = ckpts.filter(x => x.round <= round); $('caseN').textContent = held.length; const v = spare(); load(v, j.tail); v.onloadedmetadata = () => { v.currentTime = Math.max(0, v.duration - .1); }; show(v); AE.duck(false); AE.bed(BED[place] || 'amb_room', .45); replayFn = null; $('liveWait').hidden = true; openChoice(); } catch (e){ toast(e.message); } $('endBack').disabled = false; };
 $('menuBtn').onclick = () => { const m = $('menu'); m.hidden = !m.hidden; };
 $('mLang').onclick = () => { lang = lang === 'en' ? 'zh' : 'en'; Q.set('lang', lang); history.replaceState(null, '', '?' + Q.toString()); applyLang(); $('menu').hidden = true; };
 
@@ -408,13 +490,16 @@ async function openChoice(){
   for (let i = 0; i < 100 && !next; i++) await new Promise(r => setTimeout(r, 100));
   if (!next){ setChip('<b>No options received</b> · the local relay did not respond'); return; }
   fillChoice();
+  if (smashed){ smashed = false; setTimeout(() => { $('black').classList.remove('on'); front.volume = 1; AE.duck(false, .6); }, 1000); }
   $('optA').onclick = () => liveRound('option', 'A', next.A); $('optB').onclick = () => liveRound('option', 'B', next.B);
   $('sayIn').value = ''; $('sayBtn').disabled = false;
   setTimeout(() => { $('sheet').classList.add('show'); placeSubs(); }, 150);
 }
 function fillChoice(){
   $('rno').textContent = T(`Move ${round + 1}`, `第 ${round + 1} 步`);
-  $('task').hidden = false; const g = goal || {en: 'Prove this is really her, right now', zh: '先确认：屏幕上这个人是现在的她'}; $('task').innerHTML = `<small>${esc(T('DO THIS NOW', '现在要做'))}</small>${esc(T(g.en, g.zh))}`;
+  $('task').hidden = false; const g = goal || {en: 'Get Lena out before 00:00. First: is this really her?', zh: '00:00 前把 Lena 带出去。先确认：这是真的她吗？'}; const nx = STORY.timeline.find(e => e.m > clock && (e.m !== -18 && e.m !== -24 || place === '放映室')); $('task').innerHTML = `<small>${esc(T('DO THIS NOW', '现在要做'))}</small>${esc(T(g.en, g.zh))}` + (nx ? `<span class="nextEv">${esc(T(`Next: ${clockStr(nx.m)} ${nx.en} (${nx.m - clock} min)`, `下一件事：${clockStr(nx.m)} ${nx.zh}（还有 ${nx.m - clock} 分钟）`))}</span>` : '');
+  const PB = $('padBtn'); PB.hidden = !puzzle; PB.textContent = T('Enter the door code', '输入卷帘门密码'); PB.onclick = openPad;
+  const C = $('optC'); C.hidden = !(memOpt && round === 0); if (memOpt && round === 0){ C.innerHTML = `<span class="en">${esc(memOpt.en)}</span><span class="zh">${esc(memOpt.zh)}</span><span class="c">${esc(T('You remember this from last time', '上一局你知道了这件事'))}</span>`; C.onclick = () => liveRound('free', null, memOpt); }
   $('cue').innerHTML = next.cue ? `${esc(next.cue.en)}<span class="zh">${esc(next.cue.zh)}</span>` : '';
   $('optA').innerHTML = opt(next.A); $('optB').innerHTML = opt(next.B);
 }
@@ -423,25 +508,29 @@ function closeChoice(){ $('sheet').classList.remove('show'); subs.style.bottom =
 $('say').addEventListener('submit', e => { e.preventDefault(); const raw = $('sayIn').value.trim(); if (!raw || busy) return; liveRound('free', null, {zh: raw, en: raw}); });
 
 let liveRun = 0;
-const WAITS = {'放映室': [["Hold on.", '等一下。'], ["It's gone quiet out there.", '外面突然安静了。'], ["Don't go anywhere.", '别走。']], '楼梯间': [["Wait. I heard something.", '等等。我听到了什么。'], ["It's so dark down here.", '下面太黑了。'], ["Stay on the line.", '别挂。']], '封存库': [["I can only see what the light hits.", '我只看得见手电照到的地方。'], ["The air smells burnt.", '空气里有烧焦的味道。'], ["Stay with me.", '陪着我。']], '控制室': [["Keep your voice down.", '小声点。'], ["All these screens.", '这么多屏幕。'], ["One second.", '等我一秒。']], '装卸口': [["It's pouring.", '雨好大。'], ["Almost there.", '快到了。'], ["Don't hang up yet.", '先别挂。']]};
-function waitLines(my){ const box = $('lwMsgs'); box.innerHTML = ''; const pool = WAITS[place] || WAITS['放映室']; let i = 0;
-  const step = () => { if (my !== liveRun || $('liveWait').hidden || i >= pool.length) return; const t = document.createElement('div'); t.className = 'typing'; t.innerHTML = '<i></i><i></i><i></i>'; box.appendChild(t);
-    setTimeout(() => { if (my !== liveRun) return; t.remove(); const l = pool[i++], el = document.createElement('div'); el.className = 'bub'; el.innerHTML = `<small>Lena</small>${esc(l[0])}<span class="zh">${esc(l[1])}</span>`; box.appendChild(el); AE.play('msg_buzz', .25); while (box.children.length > 2) box.firstChild.remove(); setTimeout(step, 7000); }, 1800); };
-  setTimeout(step, 3500); }
+// 等待时是两个人在发消息：Lena 回应你刚说的话，你也可以接着打字。不改剧情，下一轮她记得
+function waitChat(my, said){ const box = $('lwMsgs'), chips = $('lwChips'); box.innerHTML = ''; chips.innerHTML = ''; const log = []; let n = 0, tm = null; const alive = () => my === liveRun && !$('liveWait').hidden;
+  const add = (c, you) => { const el = document.createElement('div'); el.className = 'bub' + (you ? ' you' : ''); el.innerHTML = you ? esc(c) : `<small>Lena</small>${esc(c.en)}<span class="zh">${esc(c.zh)}</span>`; box.appendChild(el); while (box.children.length > 5) box.firstChild.remove(); if (!you) AE.play('msg_buzz', .22); };
+  const ask = async text => { clearTimeout(tm); chips.innerHTML = ''; const ty = document.createElement('div'); ty.className = 'typing'; ty.innerHTML = '<i></i><i></i><i></i>'; box.appendChild(ty); const t0 = Date.now(); let j = null; try { j = await api('/api/chat', {sid, said, text, log, n}); } catch (e) {} if (!alive()) return; await new Promise(r => setTimeout(r, Math.max(0, 900 - (Date.now() - t0)))); ty.remove(); if (!alive() || !j) return; n++;
+    for (const l of j.lines){ add(l); log.push('Lena: ' + l.en); await new Promise(r => setTimeout(r, 1300)); if (!alive()) return; }
+    (j.chips || []).forEach(c => { const b = document.createElement('button'); b.type = 'button'; b.textContent = lang === 'zh' ? c.zh : c.en; b.onclick = () => send(lang === 'zh' ? c.zh : c.en); chips.appendChild(b); });
+    if (n < 7) tm = setTimeout(() => { if (alive()) ask(''); }, 8500); };
+  const send = v => { add(v, true); log.push('Me: ' + v); ask(v); };
+  add(said, true); log.push('Me: ' + said); $('lwIn').value = ''; $('lwSay').onsubmit = e => { e.preventDefault(); const v = $('lwIn').value.trim(); if (!v) return; $('lwIn').value = ''; send(v); }; setTimeout(() => { if (alive()) ask(''); }, 500); }
 async function liveRound(kind, choice, said){
   if (!K){ toast(T('Live scenes need the test link with a key', '实时生成需要带口令的测试链接')); return; }
   if (busy) return; busy = true; const my = ++liveRun, t0 = Date.now(); let r = null, rid = null;
   closeChoice(); setMode('waiting'); waitMusic(true); showSub(null);
   const herLine = lang === 'en' ? (said.en || said.zh) : (said.zh || said.en);
-  $('lwH').textContent = herLine; waitLines(my);
-  const phase = () => !r ? T('Sending…', '发送中…') : r.status === 'error' ? T('The line dropped', '信号断了') : T('Weak signal. Reconnecting her camera…', '信号很弱，正在重新接上她的画面…');
-  const hold = (label, cond) => new Promise(res => { $('liveWait').hidden = false; (function f(){ if (my !== liveRun) return; $('lwT').textContent = ((Date.now() - t0) / 1000).toFixed(1); $('lwS').textContent = label || phase(); if (cond()){ res(); } else setTimeout(f, 100); })(); });
+  $('liveWait').hidden = false; waitChat(my, herLine);
+  const phase = () => r && r.status === 'error' ? T('The line dropped', '信号断了') : T('Her camera is reconnecting. Messages still get through', '她的画面正在接回来，消息还能发');
+  const hold = (label, cond) => new Promise(res => { $('liveWait').hidden = false; (function f(){ if (my !== liveRun) return; $('lwT').textContent = ((Date.now() - t0) / 1000).toFixed(1); $('lwS').textContent = label || phase(); $('lwTbox').hidden = !DEBUG; if (cond()){ res(); } else setTimeout(f, 100); })(); });
   try { rid = (await api('/api/round', {sid, kind, choice, input: kind === 'free' ? said.zh : undefined})).id; }
   catch (e){ $('liveWait').hidden = true; busy = false; setChip('<b>Not sent</b> · ' + esc(e.message)); toast(T('Live generation unavailable', '实时生成不可用')); openChoice(); if (kind === 'free') $('sayIn').value = said.zh; return; }
   const V = [spare()]; V[0].dataset.keep = 1; V.push(spare()); delete V[0].dataset.keep;
   const poll = setInterval(async () => {
     try { r = await api(`/api/round/${rid}?k=${encodeURIComponent(K)}`); } catch (e) {}
-    if (r && r.segs) r.segs.forEach((s, i) => { if (s.url && V[i].dataset.src !== s.url){ V[i].dataset.src = s.url; load(V[i], s.url); } });
+    if (r && r.segs) r.segs.forEach((s, i) => { if (s.url && V[i].dataset.src !== s.url){ V[i].dataset.src = s.url; V[i].style.filter = ''; load(V[i], s.url); } if (s.grade && s.grade < 1) V[i].style.filter = `contrast(1.12) saturate(.78) brightness(${(.9 * s.grade).toFixed(2)})`; });
   }, 500);
   const LOCAL = location.hostname === '127.0.0.1', M = LOCAL ? 1.5 : 3.0;
   const segErr = () => r && r.segs && r.segs.some(s => s.status === 'error');
@@ -472,8 +561,9 @@ async function liveRound(kind, choice, said){
   (r.evidence_cues || []).forEach(e => gain(e.id, true));
   if (r.open_question && r.open_question.en) goal = r.open_question;
   if (r.recap && r.recap.en) recap = r.recap;
+  if (r.relay_cue && r.relay_cue.evidence) gain(r.relay_cue.evidence, true);
   if (r.location){ place = r.location; visited.add(place); AE.bed(BED[place] || 'amb_room', .45); }
-  if (r.clock_after != null) clock = r.clock_after; tcBase = 0; tcAt = Date.now();
+  if (r.clock_after != null) clock = r.clock_after; tcBase = 0; tcAt = Date.now(); alertN = r.alert || 0; puzzle = r.puzzle || null; ckpts.push({round: round + 1, clock});
   setChip(`<b>Move ${round + 1}</b> · ${esc(r.mode)} · send to play ${((view.play_at - t0) / 1000).toFixed(1)}s (director ${dir == null ? '—' : dir.toFixed(1)}s${r.director === 'prefetched' ? ' prefetched' : ''} + part 1 ${r.segs[0].ready_at ? ((r.segs[0].ready_at - r.director_at) / 1000).toFixed(1) : '—'}s, part 2 ${gen == null ? '—' : gen.toFixed(1)}s) · seam ${(view.stall || 0).toFixed(1)}s`);
   const sceneNo = round + 1;
   replayFn = () => {
@@ -483,19 +573,20 @@ async function liveRound(kind, choice, said){
   };
   round++; next = r.next || next; setSrc('direct');
   AE.bgm('wait', .3);
-  if (r.case_closed){ closed = r.ending || {}; AE.bgm('reveal', .35); $('endT').textContent = T(held.includes('E13') ? 'It names him' : 'Out, not finished', held.includes('E13') ? '证据指向了他' : '人出来了，事还没完'); $('endEn').textContent = closed.en || ''; $('endZh').textContent = closed.zh || ''; $('endMeta').textContent = T(`${held.length} of ${Object.keys(EV).length} pieces of evidence · ${round} moves`, `拿到 ${held.length} / ${Object.keys(EV).length} 份证据 · ${round} 步`); $('endZh').hidden = lang === 'en'; RT.clear(); $('endCard').hidden = false; waitMusic(true); return; }
+  if (r.case_closed){ endFlow(r.ending_id || 'gas'); return; }
   openChoice();
 
   function tick(i, v, fired){
-    const LT = (r.line_times || {})['seg' + (i + 1)] || [], ST = (r.src_times || {})['seg' + (i + 1)] || [], EC = (r.evidence_cues || []).filter(e => e.seg === i), SF = (r.sfx_cues || []).filter(e => e.seg === i), FX = (r.fx_cues || []).filter(e => e.seg === i), PA = r.pa && r.pa.seg === i ? r.pa : null; let paUntil = 0;
+    const EVT = (r.events || []).filter(e => e.seg === i), LT = (r.line_times || {})['seg' + (i + 1)] || [], ST = (r.src_times || {})['seg' + (i + 1)] || [], EC = (r.evidence_cues || []).filter(e => e.seg === i), SF = (r.sfx_cues || []).filter(e => e.seg === i), FX = (r.fx_cues || []).filter(e => e.seg === i), PA = r.pa && r.pa.seg === i ? r.pa : null; let paUntil = 0;
     if (i === 1 && r.scene_place && r.scene_place !== place) { place = r.scene_place; AE.bed(BED[place] || 'amb_room', .45); }
     const f = () => { const t = v.currentTime; const c = LT.find(x => t >= x.s && t <= x.e);
+      EVT.forEach((x, n) => { if (t >= x.at && !fired.has('e' + n)){ fired.add('e' + n); evtShow(x); } });
       SF.forEach((x, n) => { if (t >= x.at && !fired.has('s' + n)){ fired.add('s' + n); AE.play(x.id, .85); } });
       FX.forEach((x, n) => { if (t >= x.at && !fired.has('f' + n)){ fired.add('f' + n); fxRun(x); } });
-      if (PA && t >= PA.at && !fired.has('pa')){ fired.add('pa'); v.volume = .35; paUntil = PA.at + (PA.id === 'pa_midnight' ? 8.5 : 4); AE.play(PA.id, 1); if (PA.id === 'pa_midnight') midKnown = true; }
+      if (PA && t >= PA.at && !fired.has('pa')){ fired.add('pa'); v.volume = .35; paUntil = PA.at + (PA.len || 4); AE.play(PA.id, 1); if (PA.id === 'pa_midnight') midKnown = true; }
       if (paUntil && t >= paUntil){ paUntil = 0; v.volume = 1; }
       if (c) introWho(c.who);
-      if (paUntil) showSub({en: PA.en, zh: PA.zh, who: T('Building PA', '楼内广播')}); else showSub(c ? {en: c.en, zh: c.zh, who: c.who} : null); const s = ST.find(x => t >= x.s && t < x.e); if (s) setSrc(s.src); EC.forEach(e => { if (t >= e.at && !fired.has(e.id)){ fired.add(e.id); gain(e.id); } }); const rc = r.relay_cue; if (rc && rc.seg === i && t >= rc.at && !fired.has('pip')){ fired.add('pip'); showPip(rc.dur); } };
+      if (paUntil) showSub({en: PA.en, zh: PA.zh, who: T('Building PA', '楼内广播')}); else showSub(c ? {en: c.en, zh: c.zh, who: c.who} : null); const s = ST.find(x => t >= x.s && t < x.e); if (s) setSrc(s.src); EC.forEach(e => { if (t >= e.at && !fired.has(e.id)){ fired.add(e.id); gain(e.id); } }); const rc = r.relay_cue; if (rc && rc.seg === i && t >= rc.at && !fired.has('pip')){ fired.add('pip'); showPip(rc.dur, rc.clip); if (rc.evidence) gain(rc.evidence); } };
     v.ontimeupdate = f; return f;
   }
   function play(i){ return new Promise(res => {
@@ -508,5 +599,39 @@ async function liveRound(kind, choice, said){
     v.play().then(() => show(v)).catch(() => { v.muted = true; v.play().then(() => show(v)).catch(end); });
   }); }
 }
+// ---------- 门禁解谜：答案在内幕和闭锁记录里 ----------
+let padTries = 0;
+function openPad(){ const P = $('pad'), S = $('padShow'); let code = ''; const draw = () => { S.textContent = code.padEnd(4, '·'); }; S.classList.remove('bad'); draw(); $('padT').textContent = T('Roller door', '卷帘门'); $('padHint').textContent = T('He uses the same numbers every time. Four digits.', '他每次都用同一组数字。四位。'); $('padClose').textContent = T('Not yet', '先不输');
+  const K2 = $('padKeys'); K2.innerHTML = ''; ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', '⌫'].forEach(k => { const b = document.createElement('button'); b.type = 'button'; b.textContent = k; if (!k){ b.style.visibility = 'hidden'; K2.appendChild(b); return; } b.onclick = () => press(k); K2.appendChild(b); });
+  const press = async k => { if (k === '⌫'){ code = code.slice(0, -1); draw(); return; } if (code.length >= 4) return; code += k; draw(); AE.play('ui_evidence', .25); if (code.length < 4) return;
+    let j; try { j = await api('/api/puzzle', {sid, code}); } catch (e){ toast(e.message); code = ''; draw(); return; }
+    clock = j.clock; alertN = j.alert || 0; tcBase = 0; tcAt = Date.now();
+    if (j.ok){ P.hidden = true; puzzle = null; AE.play('latch', .9); liveRound('free', null, {zh: '密码对了，2317。Lena，钻出去！', en: "It's 2317. Lena, go, get out!"}); return; }
+    padTries = j.tries; S.classList.remove('bad'); void S.offsetWidth; S.classList.add('bad'); AE.play('alarm', .4); if (navigator.vibrate) navigator.vibrate(120); code = ''; setTimeout(draw, 500); fillChoice();
+    $('padHint').textContent = j.tries >= 2 ? T('Wrong. Every miss, he sees it. When did her door lock?', '错了。每错一次他都看得到。她的门是几点锁的？') : T('Red light. Wrong. That cost a minute.', '红灯。错了，又过去一分钟。');
+    if (j.alert >= 3 || j.clock >= 0){ P.hidden = true; liveRound('free', null, {zh: '又错了', en: 'Wrong again'}); } };
+  $('padClose').onclick = () => { P.hidden = true; }; P.hidden = false; }
+// ---------- 结局：00:00 一定发生事 ----------
+const FAKE_SUB = [[.2, 3.3, "Hi. It's me. False alarm.", '嗨，是我。虚惊一场。'], [3.5, 7.3, "I'm home now. Delete what I sent you.", '我到家了。把我发你的东西删掉。'], [7.5, 9.3, "I'm fine.", '我没事。'], [9.4, 10.2, "I'm—", '我——'], [10.4, 13.2, "I'm fine. Don't send anyone.", '我没事，别叫人来。']];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+async function midnight(from, line){ const M = $('mid'), T0 = $('midT'), S = $('midS'); front.volume = 0; M.hidden = false; S.textContent = ''; AE.duck(true, .1); for (let m = Math.min(from, -1); m < 0; m++){ T0.textContent = clockStr(m); await sleep(Math.max(35, 500 / Math.max(1, -from))); } T0.textContent = '00:00'; AE.duck(false, .05); AE.play('stinger', 1); AE.play('alarm', .55); AE.play('hiss', .7); AE.bed(null); AE.bgm(null); await sleep(900); S.textContent = line; await sleep(3000); }
+function playClip(src, subs){ return new Promise(res => { const v = spare(); v.onended = null; load(v, src); v.muted = false; v.onloadeddata = () => { v.play().then(() => show(v)).catch(() => { v.muted = true; v.play().then(() => show(v)).catch(res); }); }; v.ontimeupdate = () => { const c = subs.find(x => v.currentTime >= x[0] && v.currentTime <= x[1]); showSub(c ? {en: c[2], zh: c[3], who: 'Lena'} : null); }; const end = () => { v.ontimeupdate = null; v.onended = null; v.onerror = null; showSub(null); res(); }; v.onended = end; v.onerror = end; }); }
+async function fakeCall(){ const I = $('fakeIn'); $('fakeInS').textContent = T('Video call · 00:03', '视频来电 · 00:03'); await new Promise(res => { I.hidden = false; AE.play('msg_buzz', .8); const r = setInterval(() => AE.play('msg_buzz', .8), 1800); $('fakeOk').onclick = () => { clearInterval(r); I.hidden = true; res(); }; });
+  $('mid').hidden = true; setMode('playing'); $('black').classList.remove('on'); setSrc('direct'); await playClip(SRC('media/END_FAKE.mp4'), FAKE_SUB);
+  const U = $('fakeUI'); $('fakeQ').textContent = T('She looks fine. She sounds fine. Is this her?', '她看起来没事，听起来也没事。这是她吗？'); $('fakeTest').innerHTML = `<span class="en">Lena, raise two fingers and say "blue umbrella"</span><span class="zh">Lena，举两根手指，说“蓝伞”</span>`; $('fakeHang').textContent = T('Hang up', '挂断'); U.hidden = false;
+  await new Promise(res => { $('fakeHang').onclick = () => { U.hidden = true; res(); }; $('fakeTest').onclick = async () => { U.hidden = true; await playClip(SRC('media/END_TEST.mp4'), [[.2, 4.2, "I'm fine. Don't send anyone.", '我没事，别叫人来。']]); $('black').classList.add('on'); $('black').textContent = T('She never raised her fingers.', '她没有举手指。她又推了一次杯子。'); AE.play('stinger', .9); await sleep(2600); $('black').textContent = ''; res(); }; }); }
+async function endFlow(id){ const E = STORY.endings[id] || STORY.endings.gas; closed = E; mem.runs++; mem.last = E.title.zh; held.forEach(x => { if (!mem.known.includes(x)) mem.known.push(x); }); if (!mem.endings.includes(id)) mem.endings.push(id); memSave(); $('sheet').classList.remove('show'); showSub(null);
+  const fail = ['gas', 'door', 'caught', 'handed'].includes(id); const from = clock; const lines = {gas: T('The doors on B2 and B3 have sealed.', 'B2、B3 的门封死了。气体开始释放。'), door: T('She never left the room.', '她一直没能离开那个房间。'), caught: T('He cut the line. The test ran on time.', '他切断了线路。测试准时开始。'), handed: T('The test ran on time.', '测试准时开始。'), escaped: T('The gas fired on empty floors. She is outside.', '楼下空放了一场气。她在楼外。'), truth: T('The gas fired on empty floors. She is outside.', '楼下空放了一场气。她在楼外。')};
+  RT.clear(); await midnight(from, lines[id]); clock = 0; $('tc').hidden = true; RT.clear(); if (fail) await fakeCall(); else if (id === 'escaped'){ $('mid').hidden = true; showPip(9, 'confess'); await sleep(7000); } else { AE.bgm('reveal', .35); }
+  $('mid').hidden = true; $('black').classList.remove('on'); RT.clear(); const K2 = Object.keys(STORY.endings); $('endK').textContent = T(`Ending ${mem.endings.length} of ${K2.length} found`, `已解锁结局 ${mem.endings.length} / ${K2.length}`); $('endT').textContent = T(E.title.en, E.title.zh); $('endEn').textContent = E.text.en; $('endZh').textContent = E.text.zh; $('endZh').hidden = lang === 'en';
+  const miss = []; if (id !== 'truth'){ if (!held.includes('E05')) miss.push(T('Who locked the door? The terminal in her room knows.', '门是谁锁的？她房间里的终端有记录。')); if (!held.includes('E09')) miss.push(T('Lena is hiding something. You never made her say it.', 'Lena 瞒着一件事，你还没逼她说出来。')); if (!held.includes('E10')) miss.push(T('You never saw the floor below her.', '你还没看过她楼下那一层。')); if (!held.includes('E13')) miss.push(T('Nothing yet names who pressed play. Try the control room.', '还没有东西能指认谁按的播放。去控制室。')); if (place !== '楼外') miss.push(T('The way out is the roller door. It wants a code you have already seen.', '唯一的出口是卷帘门，要一组你已经见过的数字。')); }
+  $('endMiss').innerHTML = miss.slice(0, 3).map(esc).join('<br>');
+  $('endGal').innerHTML = K2.sort((a, b) => STORY.endings[a].order - STORY.endings[b].order).map(k => { const got = mem.endings.includes(k); return `<div class="${k === id ? 'now' : got ? 'got' : ''}">${got ? '●' : '○'} ${got ? esc(T(STORY.endings[k].title.en, STORY.endings[k].title.zh)) : '? ? ?'}</div>`; }).join('');
+  $('endMeta').textContent = T(`${held.length} pieces of evidence · ${round} moves`, `拿到 ${held.length} 份证据 · 走了 ${round} 步`);
+  $('endAgain').textContent = T('Back to 23:24. You keep what you know', '回到 23:24，带着你知道的重来');
+  const back = ckpts.length >= 3 ? ckpts[ckpts.length - 3] : null; const B = $('endBack'); B.hidden = !back || !fail; if (back){ B.dataset.round = back.round; B.textContent = T(`Or go back to ${clockStr(back.clock)} and choose again`, `或者回到 ${clockStr(back.clock)}，重新选`); }
+  $('endCard').hidden = false; waitMusic(true); }
+// 回看和重来时恢复计时条
+const _showTc = () => { $('tc').hidden = false; }; $('endAgain').addEventListener('click', _showTc); $('endBack').addEventListener('click', _showTc); $('mRestart').addEventListener('click', _showTc);
 })();
 </script>
