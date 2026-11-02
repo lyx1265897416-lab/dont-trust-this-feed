@@ -391,6 +391,7 @@ function fxRun(x){ const B = $('black'), st = $('stage');
   else if (x.type === 'insert') cutIn(x);
   else if (x.type === 'smash'){ front.volume = 0; AE.duck(true, .02); B.textContent = ''; B.classList.add('on'); smashed = true; }
 }
+if (DEBUG) window.__fx = x => fxRun(x);
 // 插入镜头：远景之后硬切贴脸特写。底下的视频继续走，切回来时人已经到了身边
 let smashed = false; const INS = {};
 function loadInserts(){ ['ins_hollis', 'ins_voss', 'ins_fake'].forEach(id => { if (INS[id]) return; const v = document.createElement('video'); v.className = 'ins'; v.muted = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto'; v.src = SRC(`media/${id}.mp4`); $('stage').appendChild(v); INS[id] = v; v.load(); }); }
@@ -485,6 +486,7 @@ let coachDone = false;
 function showCoach(){ coachDone = true; const c = $('coach'); c.innerHTML = `<h2>${esc(T('How this works', '怎么玩'))}</h2><ol><li><b>${esc(T('TALK TO HER', '和她说话'))}</b>${esc(T('Tap a choice, or type anything. Your own idea works, even a strange one.', '点选项，或者打任何话。你自己想的办法也算，再怪也行。'))}</li><li><b>${esc(T('USE WHAT ONLY YOU CAN SEE', '用只有你能看到的'))}</b>${esc(T('The center feed is on your screen. She can\'t see it. Watch what is behind her too.', '中心转播在你的屏幕上，她看不到。也留意她身后。'))}</li><li><b>${esc(T('KEEP TRACK', '随时看案件板'))}</b>${esc(T('The folder top right: what to do now, where she is, what you still need.', '右上角的文件夹：现在要做什么、她在哪、还缺什么。'))}</li></ol><button class="cta" id="coachOk">${esc(T('Got it', '知道了'))}</button>`; c.hidden = false; $('coachOk').onclick = () => { c.hidden = true; }; }
 const opt = o => `<span class="en">${esc(o.en)}</span><span class="zh">${esc(o.zh)}</span>` + (o.cost && (o.cost.en || o.cost.zh) ? `<span class="c">${esc(T(o.cost.en || o.cost.zh, o.cost.zh || o.cost.en))}</span>` : '');
 async function openChoice(){
+  if (busy) return;
   setMode('choosing'); $('shade').classList.add('deep'); waitMusic(true); RT.clear();
   $('replayBtn').hidden = !replayFn; $('replayBtn').textContent = T('Replay', '重看这一段');
   for (let i = 0; i < 100 && !next; i++) await new Promise(r => setTimeout(r, 100));
