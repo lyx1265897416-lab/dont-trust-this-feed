@@ -1,0 +1,101 @@
+{
+ "total": 33.76,
+ "src": [
+  {
+   "s": 0,
+   "e": 4.2,
+   "src": "memo"
+  },
+  {
+   "s": 4.2,
+   "e": 10.75,
+   "src": "relay"
+  },
+  {
+   "s": 10.75,
+   "e": 12.15,
+   "src": "freeze"
+  },
+  {
+   "s": 12.15,
+   "e": 18.7,
+   "src": "relay"
+  },
+  {
+   "s": 18.7,
+   "e": 33.762,
+   "src": "direct"
+  }
+ ],
+ "cues": [
+  {
+   "s": 0.6,
+   "e": 4.0,
+   "who": "Lin",
+   "en": "Don't trust the me who's talking.",
+   "zh": "别信正在说话的我。"
+  },
+  {
+   "s": 4.5,
+   "e": 7.4,
+   "who": "Center feed",
+   "en": "I'm fine. Don't send anyone.",
+   "zh": "我没事，别叫人来。"
+  },
+  {
+   "s": 12.450000000000001,
+   "e": 15.350000000000001,
+   "who": "Center feed",
+   "en": "I'm fine. Don't send anyone.",
+   "zh": "我没事，别叫人来。"
+  },
+  {
+   "s": 18.8,
+   "e": 20.9,
+   "who": "Lin",
+   "en": "You picked up. Okay.",
+   "zh": "你接了。好。"
+  },
+  {
+   "s": 21.0,
+   "e": 25.4,
+   "who": "Lin",
+   "en": "Whatever's on the center feed, that's not me. Not now.",
+   "zh": "中心转播上的那个，不是我。不是现在的我。"
+  },
+  {
+   "s": 28.799999999999997,
+   "e": 30.299999999999997,
+   "who": "Lin",
+   "en": "Someone's at the door.",
+   "zh": "门外有人。"
+  },
+  {
+   "s": 30.4,
+   "e": 33.5,
+   "who": "Lin",
+   "en": "Don't hang up. Tell me how to prove it's me.",
+   "zh": "别挂。告诉我怎么证明这是我。"
+  }
+ ],
+ "msgs": [
+  {
+   "at": 10.85,
+   "who": "Lin",
+   "en": "I didn't get your reply.",
+   "zh": "我没收到你的回复。"
+  },
+  {
+   "at": 17.5,
+   "who": "Lin",
+   "en": "Direct call. Pick up.",
+   "zh": "直连。接。"
+  }
+ ],
+ "evidence": [
+  {
+   "id": "E01",
+   "at": 1.0
+  }
+ ]
+}
