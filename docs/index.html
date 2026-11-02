@@ -121,7 +121,7 @@ body.playing #liveChip,body.start #liveChip{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 body.lang-en .zh{display:none!important}
 /* V2 暗调和恐怖手法：统一压暗、暗角、颗粒；选择点极慢推近；信号断、灯闪、震动都是页面做的 */
-video.v{filter:contrast(1.14) saturate(.76) brightness(.8);transform:scale(1);transition:none}
+video.v{filter:contrast(1.12) saturate(.78) brightness(.9);transform:scale(1);transition:none}
 body.choosing video.v.on,body.waiting video.v.on{transform:scale(1.06);transition:transform 45s linear}
 #grade{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,transparent 38%,rgba(0,0,0,.62) 100%)}
 #grade::after{content:"";position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
