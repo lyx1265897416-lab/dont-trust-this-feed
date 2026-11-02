@@ -165,6 +165,11 @@ video.ins.on{opacity:1}
 .gal .got{color:#f4f6f5}.gal .now{color:var(--relay)}
 .miss{font-size:13px;line-height:1.5;color:#e2c79c}
 #endCard{overflow:auto;justify-content:flex-start}
+/* 嵌在即兴剧场 APP 里：左上角留给 APP 的返回键，语言跟 APP */
+body.embed #top{padding-left:62px}
+body.embed #tc{left:62px}
+body.embed #tipH{padding-left:48px}
+body.embed #mLang{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 body.lang-en .zh{display:none!important}
 /* V2 暗调和恐怖手法：统一压暗、暗角、颗粒；选择点极慢推近；信号断、灯闪、震动都是页面做的 */
@@ -326,6 +331,7 @@ const AE = (() => {
 })();
 const waitMusic = on => { if (on) AE.bgm('wait', .3); };
 const BED = {'放映室': 'amb_room', '楼梯间': 'amb_stair', '封存库': 'amb_vault', '控制室': 'amb_ops', '装卸口': 'amb_dock', '楼外': 'amb_dock'};
+const EMBED = Q.has('embed'); if (EMBED) document.body.classList.add('embed'); const tell = m => { if (EMBED) parent.postMessage(Object.assign({dttf: 1}, m), '*'); };
 const DEBUG = Q.has('debug'); let alertN = 0, puzzle = null, STORY = {tip: [], timeline: [], endings: {}}, ckpts = [], memOpt = null;
 const STORE = 'dttf_v3'; const mem = (() => { try { return JSON.parse(localStorage.getItem(STORE)) || {runs: 0, endings: [], known: []}; } catch (e) { return {runs: 0, endings: [], known: []}; } })(); const memSave = () => { try { localStorage.setItem(STORE, JSON.stringify(mem)); } catch (e) {} };
 let place = '放映室', clock = -36, midKnown = true; const clockStr = m => { const h = m < 0 ? 23 : 0, mm = m < 0 ? 60 + m : m; return `${String(h).padStart(2, '0')}:${String(mm).padStart(2, '0')}`; };
@@ -573,6 +579,7 @@ async function liveRound(kind, choice, said){
     RT.begin({key: 'round:' + rid, free: true, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T(`Move ${sceneNo}`, `第 ${sceneNo} 步`), jump: (j, t) => { V.forEach(x => { if (x !== V[j]){ x.pause(); x.onended = null; x.ontimeupdate = null; } }); go(j, t); }});
     go(0, 0);
   };
+  tell({ev: 'round', n: round + 1, text: herLine, en: ((r.lines || {}).seg1 || [])[0] || '', zh: ((r.zh || {}).seg1 || [])[0] || ''});
   round++; next = r.next || next; setSrc('direct');
   AE.bgm('wait', .3);
   if (r.case_closed){ endFlow(r.ending_id || 'gas'); return; }
@@ -622,7 +629,7 @@ async function fakeCall(){ const I = $('fakeIn'); $('fakeInS').textContent = T('
   $('mid').hidden = true; setMode('playing'); $('black').classList.remove('on'); setSrc('direct'); await playClip(SRC('media/END_FAKE.mp4'), FAKE_SUB);
   const U = $('fakeUI'); $('fakeQ').textContent = T('She looks fine. She sounds fine. Is this her?', '她看起来没事，听起来也没事。这是她吗？'); $('fakeTest').innerHTML = `<span class="en">Lena, raise two fingers and say "blue umbrella"</span><span class="zh">Lena，举两根手指，说“蓝伞”</span>`; $('fakeHang').textContent = T('Hang up', '挂断'); U.hidden = false;
   await new Promise(res => { $('fakeHang').onclick = () => { U.hidden = true; res(); }; $('fakeTest').onclick = async () => { U.hidden = true; await playClip(SRC('media/END_TEST.mp4'), [[.2, 4.2, "I'm fine. Don't send anyone.", '我没事，别叫人来。']]); $('black').classList.add('on'); $('black').textContent = T('She never raised her fingers.', '她没有举手指。她又推了一次杯子。'); AE.play('stinger', .9); await sleep(2600); $('black').textContent = ''; res(); }; }); }
-async function endFlow(id){ const E = STORY.endings[id] || STORY.endings.gas; closed = E; mem.runs++; mem.last = E.title.zh; held.forEach(x => { if (!mem.known.includes(x)) mem.known.push(x); }); if (!mem.endings.includes(id)) mem.endings.push(id); memSave(); $('sheet').classList.remove('show'); showSub(null);
+async function endFlow(id){ const E = STORY.endings[id] || STORY.endings.gas; closed = E; mem.runs++; mem.last = E.title.zh; held.forEach(x => { if (!mem.known.includes(x)) mem.known.push(x); }); if (!mem.endings.includes(id)) mem.endings.push(id); memSave(); tell({ev: 'ending', id, title: E.title}); $('sheet').classList.remove('show'); showSub(null);
   const fail = ['gas', 'door', 'caught', 'handed'].includes(id); const from = clock; const lines = {gas: T('The doors on B2 and B3 have sealed.', 'B2、B3 的门封死了。气体开始释放。'), door: T('She never left the room.', '她一直没能离开那个房间。'), caught: T('He cut the line. The test ran on time.', '他切断了线路。测试准时开始。'), handed: T('The test ran on time.', '测试准时开始。'), escaped: T('The gas fired on empty floors. She is outside.', '楼下空放了一场气。她在楼外。'), truth: T('The gas fired on empty floors. She is outside.', '楼下空放了一场气。她在楼外。')};
   RT.clear(); await midnight(from, lines[id]); clock = 0; $('tc').hidden = true; RT.clear(); if (fail) await fakeCall(); else if (id === 'escaped'){ $('mid').hidden = true; showPip(9, 'confess'); await sleep(7000); } else { AE.bgm('reveal', .35); }
   $('mid').hidden = true; $('black').classList.remove('on'); RT.clear(); const K2 = Object.keys(STORY.endings); $('endK').textContent = T(`Ending ${mem.endings.length} of ${K2.length} found`, `已解锁结局 ${mem.endings.length} / ${K2.length}`); $('endT').textContent = T(E.title.en, E.title.zh); $('endEn').textContent = E.text.en; $('endZh').textContent = E.text.zh; $('endZh').hidden = lang === 'en';
