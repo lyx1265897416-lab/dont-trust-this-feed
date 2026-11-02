@@ -1,5 +1,5 @@
 {
- "total": 33.76,
+ "total": 38.8,
  "src": [
   {
    "s": 0,
@@ -23,7 +23,7 @@
   },
   {
    "s": 18.7,
-   "e": 33.762,
+   "e": 38.796,
    "src": "direct"
   }
  ],
@@ -50,29 +50,36 @@
    "zh": "我没事，别叫人来。"
   },
   {
-   "s": 18.8,
-   "e": 20.9,
+   "s": 19.7,
+   "e": 22.7,
    "who": "Lena",
-   "en": "You picked up. Okay.",
-   "zh": "你接了。好。"
+   "en": "It's Lena. You're the only one outside this building.",
+   "zh": "我是 Lena。你是楼外唯一的人。"
   },
   {
-   "s": 21.0,
-   "e": 25.7,
+   "s": 22.7,
+   "e": 24.7,
    "who": "Lena",
-   "en": "Whatever's on the center feed, that's not me. Not now.",
-   "zh": "中心转播上的那个，不是我。不是现在的我。"
+   "en": "They locked me in B2.",
+   "zh": "他们把我锁在地下二层了。"
   },
   {
-   "s": 28.799999999999997,
-   "e": 30.299999999999997,
+   "s": 24.7,
+   "e": 27.9,
+   "who": "Lena",
+   "en": "That feed? That's not me. Not now.",
+   "zh": "转播上那个？不是我。不是现在的我。"
+  },
+  {
+   "s": 31.747999999999998,
+   "e": 33.748,
    "who": "Lena",
    "en": "Someone's at the door.",
    "zh": "门外有人。"
   },
   {
-   "s": 30.4,
-   "e": 33.7,
+   "s": 33.748,
+   "e": 38.048,
    "who": "Lena",
    "en": "Don't hang up. Tell me how to prove it's me.",
    "zh": "别挂。告诉我怎么证明这是我。"
@@ -96,6 +103,18 @@
   {
    "id": "E01",
    "at": 1.0
+  }
+ ],
+ "fx": [
+  {
+   "type": "signal_cut",
+   "at": 18.45,
+   "dur": 0.5
+  },
+  {
+   "type": "shake",
+   "at": 30.95,
+   "dur": 0.4
   }
  ]
 }
