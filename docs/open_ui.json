@@ -31,20 +31,20 @@
   {
    "s": 0.6,
    "e": 4.0,
-   "who": "Lin",
+   "who": "Lena",
    "en": "Don't trust the me who's talking.",
    "zh": "别信正在说话的我。"
   },
   {
    "s": 4.5,
-   "e": 7.4,
+   "e": 8.8,
    "who": "Center feed",
    "en": "I'm fine. Don't send anyone.",
    "zh": "我没事，别叫人来。"
   },
   {
    "s": 12.450000000000001,
-   "e": 15.350000000000001,
+   "e": 16.75,
    "who": "Center feed",
    "en": "I'm fine. Don't send anyone.",
    "zh": "我没事，别叫人来。"
@@ -52,28 +52,28 @@
   {
    "s": 18.8,
    "e": 20.9,
-   "who": "Lin",
+   "who": "Lena",
    "en": "You picked up. Okay.",
    "zh": "你接了。好。"
   },
   {
    "s": 21.0,
-   "e": 25.4,
-   "who": "Lin",
+   "e": 25.7,
+   "who": "Lena",
    "en": "Whatever's on the center feed, that's not me. Not now.",
    "zh": "中心转播上的那个，不是我。不是现在的我。"
   },
   {
    "s": 28.799999999999997,
    "e": 30.299999999999997,
-   "who": "Lin",
+   "who": "Lena",
    "en": "Someone's at the door.",
    "zh": "门外有人。"
   },
   {
    "s": 30.4,
-   "e": 33.5,
-   "who": "Lin",
+   "e": 33.7,
+   "who": "Lena",
    "en": "Don't hang up. Tell me how to prove it's me.",
    "zh": "别挂。告诉我怎么证明这是我。"
   }
@@ -81,13 +81,13 @@
  "msgs": [
   {
    "at": 10.85,
-   "who": "Lin",
+   "who": "Lena",
    "en": "I didn't get your reply.",
    "zh": "我没收到你的回复。"
   },
   {
    "at": 17.5,
-   "who": "Lin",
+   "who": "Lena",
    "en": "Direct call. Pick up.",
    "zh": "直连。接。"
   }

@@ -149,7 +149,7 @@ body.lang-en .zh{display:none!important}
     <button class="opt" id="optA"></button>
     <button class="opt" id="optB"></button>
     <form id="say" autocomplete="off">
-      <input id="sayIn" maxlength="120" data-en-ph="Or tell Lin what to do…" data-zh-ph="或者，直接告诉 Lin 怎么做…" aria-label="Tell Lin what to do">
+      <input id="sayIn" maxlength="120" data-en-ph="Or tell Lena what to do…" data-zh-ph="或者，直接告诉 Lena 怎么做…" aria-label="Tell Lena what to do">
       <button id="sayBtn" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
     </form>
     <div class="rowline"><span class="rno" id="rno"></span><button class="link" id="hintBtn" type="button"></button><button class="link" id="replayBtn" type="button" hidden></button></div>
@@ -184,7 +184,7 @@ const Q = new URLSearchParams(location.search), K = Q.get('k') || '', MODE = 'au
 const PAGES = location.hostname.endsWith('github.io');
 let API = location.origin;
 const relayReady = PAGES ? fetch('relay.json?t=' + Date.now(), {cache: 'no-store'}).then(r => r.json()).then(j => { API = j.url; }) : Promise.resolve();
-const CDN = /*CDN*/{"media/OPEN.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/095ffd5bbd06422ca758967ab0d9ded3/OPEN.mp4", "media/IDLE0.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/432cba6206874397bf53fbe98d57b536/IDLE0.mp4", "media/clip.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/ca84ae6187004a6586d5f06d4a8c939d/clip.mp4", "media/poster.jpg": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/a13852ef10354ed9ba08e59ddc3a237a/poster.jpg", "audio/investigate.mp3": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/f388b6039f2d42918fc22685f4a06287/investigate.mp3"}/*END*/;
+const CDN = /*CDN*/{"media/OPEN.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/54784189039345778fdd5887e24aa9bc/OPEN.mp4", "media/IDLE0.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/8d492de185aa401eb92b73e5fdeda8d6/IDLE0.mp4", "media/clip.mp4": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/290d22ea4cc048e8bb89458cad58e867/clip.mp4", "media/poster.jpg": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/4edf6f5d92df4a429b4237e0457013d2/poster.jpg", "audio/investigate.mp3": "https://storage.googleapis.com/waku-core-aicap/uploads/usr_4a6e5fb234d64da0a9429e519b299f07/f388b6039f2d42918fc22685f4a06287/investigate.mp3"}/*END*/;
 const SRC = p => PAGES && CDN[p] ? CDN[p] : p;
 const PREVIEW_NEXT = /*NEXT*/{"cue": {"zh": "门把手还在响。你要先确定，屏幕上这个人是不是现在的她。", "en": "The handle's still moving. First: is this really her, right now?"}, "A": {"zh": "让她举两根手指，说“蓝伞”", "en": "Have her raise two fingers and say \"blue umbrella\"", "leads_to": "K01：她当场做到，转播还在放推杯子"}, "B": {"zh": "保存两段转播，逐帧对照", "en": "Save both feed clips and compare them", "leads_to": "K01：两段完全相同，她说她今晚没碰过杯子"}}/*END*/;
 const pool = [$('va'), $('vb'), $('vc')]; let front = pool[0];
@@ -202,7 +202,7 @@ const applyLang = () => {
   document.querySelectorAll('[data-en]').forEach(el => el.textContent = el.dataset[lang]);
   $('title').innerHTML = T('Don\'t trust <em>this feed</em>', '别信<em>这段直播</em>');
   $('dTitle').textContent = T('Case file', '案卷');
-  $('hintBtn').textContent = T('Stuck? Ask what\'s missing', '卡住了？问 Lin 还缺什么');
+  $('hintBtn').textContent = T('Stuck? Ask what\'s missing', '卡住了？问 Lena 还缺什么');
   document.querySelectorAll('[data-en-ph]').forEach(el => el.placeholder = lang === 'zh' ? el.dataset.zhPh : el.dataset.enPh);
   $('mLangV').textContent = lang === 'en' ? 'English' : 'Chinese';
   if (next && document.body.classList.contains('choosing')) fillChoice();
@@ -223,12 +223,12 @@ addEventListener('resize', placeSubs);
 // 信号来源：画面从哪一路来，永远标清楚
 let verified = false;
 const SRC_LABEL = {
-  memo: () => ['--relay', 'VOICE MEMO', 'Lin · 23:02'],
+  memo: () => ['--relay', 'VOICE MEMO', 'Lena · 23:02'],
   relay: () => ['--relay', 'CENTER RELAY', 'LIVE?'],
   freeze: () => ['--relay', 'CENTER RELAY', 'LIVE?'],
-  direct: () => ['--direct', 'DIRECT', verified ? 'Lin · verified live' : 'Lin · unverified'],
-  '当面': () => ['--direct', 'IN PERSON', 'Lin'],
-  '前置': () => SRC_LABEL.direct(), '后置': () => ['--direct', 'DIRECT', 'rear camera'], '来电': () => ['--chen', 'OPS LINE', 'Chen Cen']
+  direct: () => ['--direct', 'DIRECT', verified ? 'Lena · verified live' : 'Lena · unverified'],
+  '当面': () => ['--direct', 'IN PERSON', 'Lena'],
+  '前置': () => SRC_LABEL.direct(), '后置': () => ['--direct', 'DIRECT', 'rear camera'], '来电': () => ['--chen', 'OPS LINE', 'Adrian Voss']
 };
 function setSrc(k){ if (!k){ $('src').hidden = true; return; } const f = SRC_LABEL[k] || SRC_LABEL.direct, [c, a, b] = f(); const el = $('src'); el.hidden = false; el.style.setProperty('--c', `var(${c})`); $('srcA').textContent = a; $('srcB').textContent = b; }
 
@@ -273,7 +273,7 @@ function playOpening(){
   RT.begin({key: 'OPEN', parts: [{v: ov, d: UI.total}]}); replayFn = playOpening;
   ov.play().then(() => show(ov)).catch(() => { show(ov); toast(T('Tap the screen to start', '点一下画面开始')); });
   ov.ontimeupdate = () => { const t = ov.currentTime; const c = UI.cues.find(q => t >= q.s && t <= q.e); showSub(c || null); const s = UI.src.find(q => t >= q.s && t < q.e); if (s) setSrc(s.src);
-    UI.msgs.forEach((m, i) => { if (t >= m.at && !fired.has('m' + i)){ fired.add('m' + i); bubble('Lin', m); } });
+    UI.msgs.forEach((m, i) => { if (t >= m.at && !fired.has('m' + i)){ fired.add('m' + i); bubble('Lena', m); } });
     UI.evidence.forEach(e => { if (t >= e.at && !fired.has(e.id)){ fired.add(e.id); gain(e.id); } }); };
   ov.onended = () => { RT.done('OPEN'); RT.clear(); ov.ontimeupdate = null; idle.currentTime = 0; idle.play().catch(() => {}); show(idle); setSrc('direct'); openChoice(); };
 }
@@ -311,7 +311,7 @@ async function liveRound(kind, choice, said){
   closeChoice(); setMode('waiting'); waitMusic(true); showSub(null);
   const herLine = lang === 'en' ? (said.en || said.zh) : (said.zh || said.en);
   $('lwH').textContent = T('You: ', '你：') + herLine;
-  const phase = () => !r ? T('Sending to Lin…', '正在发给 Lin…') : r.status === 'submitted' ? T('Lin got it…', 'Lin 收到了…') : r.status === 'error' ? T('The line dropped', '信号断了')
+  const phase = () => !r ? T('Sending to Lena…', '正在发给 Lena…') : r.status === 'submitted' ? T('Lena got it…', 'Lena 收到了…') : r.status === 'error' ? T('The line dropped', '信号断了')
     : (r.segs && r.segs[0] && r.segs[0].url && r.segs[1] && !r.segs[1].url) ? T('Connecting the picture…', '画面接通中…') : T('Waiting for her camera…', '等她的画面…');
   const hold = (label, cond) => new Promise(res => { $('liveWait').hidden = false; (function f(){ if (my !== liveRun) return; $('lwT').textContent = ((Date.now() - t0) / 1000).toFixed(1); $('lwS').textContent = label || phase(); if (cond()){ res(); } else setTimeout(f, 100); })(); });
   try { rid = (await api('/api/round', {sid, kind, choice, input: kind === 'free' ? said.zh : undefined})).id; }
