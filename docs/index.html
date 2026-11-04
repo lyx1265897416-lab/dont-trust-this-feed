@@ -539,7 +539,8 @@ async function liveRound(kind, choice, said){
   catch (e){ $('liveWait').hidden = true; busy = false; setChip('<b>Not sent</b> · ' + esc(e.message)); toast(T('Live generation unavailable', '实时生成不可用')); openChoice(); if (kind === 'free') $('sayIn').value = said.zh; return; }
   const V = [spare()]; V[0].dataset.keep = 1; V.push(spare()); delete V[0].dataset.keep;
   const poll = setInterval(async () => {
-    try { r = await api(`/api/round/${rid}?k=${encodeURIComponent(K)}`); } catch (e) {}
+    try { r = await api(`/api/round/${rid}?k=${encodeURIComponent(K)}`); } catch (e) { if (/not found|404/.test(e.message)) r = {status: 'error', err: T('The server restarted and this scene was lost. Please send again.', '中转刚才重启，这一轮中断了，请再发一次'), segs: []}; }  // 中转重启后这一轮在内存里没了：别一直等
+    if (r && r.status === 'error' && /中转刚才重启/.test(r.err || '')) r.err = T('The server restarted and this scene was lost. Please send again.', r.err);
     if (r && r.segs) r.segs.forEach((s, i) => { if (s.url && V[i].dataset.src !== s.url){ V[i].dataset.src = s.url; V[i].style.filter = ''; V[i]._curve = null; load(V[i], s.url); } if (s.grade_curve && V[i].dataset.src === s.url) V[i]._curve = s.grade_curve; else if (s.grade && s.grade < 1) V[i].style.filter = `contrast(1.12) saturate(.78) brightness(${(.9 * s.grade).toFixed(2)})`; });
   }, 500);
   const LOCAL = location.hostname === '127.0.0.1', M = LOCAL ? 1.5 : 3.0;
@@ -567,7 +568,7 @@ async function liveRound(kind, choice, said){
   const gen = r.segs && r.segs.every(s => s.ready_at) ? Math.max(...r.segs.map(s => s.ready_at - r.director_at)) / 1000 : null;
   const dir = r.director_at ? (r.director_at - r.at) / 1000 : null;
   busy = false;
-  if (!view.play_at || segErr()){ const low = (r.segs || []).some(s => s.err_code === 10005); setChip(low ? '<b>Vivix balance low</b> · this scene was not generated (10005). Top up, then send again' : `<b>This scene failed</b> · ${esc((r.segs || []).map(s => s.err).filter(Boolean)[0] || r.err || '')} · you can choose again`); openChoice(); return; }
+  if (!view.play_at || segErr()){ const low = (r.segs || []).some(s => s.err_code === 10005); setChip(low ? '<b>Vivix balance low</b> · this scene was not generated (10005). Top up, then send again' : `<b>This scene failed</b> · ${esc((r.segs || []).map(s => s.err).filter(Boolean)[0] || r.err || '')} · you can choose again`); openChoice(); if (kind === 'free' && r.err) $('sayIn').value = said.zh; return; }
   (r.evidence_cues || []).forEach(e => gain(e.id, true));
   if (r.open_question && r.open_question.en) goal = r.open_question;
   if (r.recap && r.recap.en) recap = r.recap;
