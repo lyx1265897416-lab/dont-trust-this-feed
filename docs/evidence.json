@@ -429,5 +429,23 @@
     "en": "You trusted the voice. He said thank you, very politely. The proof is gone. The doors stayed shut. At 00:00 the feed still said she's fine."
    }
   }
- }
+ },
+ "tip_v2": [
+  {
+   "en": "Lena Hart is locked in on B2 at Meridian. You're the one she'll call.",
+   "zh": "Lena Hart 被锁在 Meridian 地下二层。她会打给你。"
+  },
+  {
+   "en": "The feed says she's fine. That was recorded last night.",
+   "zh": "转播里她说自己没事，那是昨晚录的。"
+  },
+  {
+   "en": "At 00:00 the gas fires on her floor. Six years ago tonight, a man died down there the same way.",
+   "zh": "00:00 她那层会放灭火气体。六年前的今晚，楼下有人就是这样死的。"
+  },
+  {
+   "en": "She doesn't know. And if she calls after midnight saying she's fine, it isn't her.",
+   "zh": "这些她都不知道。午夜之后要是“她”打来说没事，那不是她。"
+  }
+ ]
 }

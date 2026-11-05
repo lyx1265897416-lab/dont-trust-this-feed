@@ -1,0 +1,128 @@
+{
+ "total": 38.8,
+ "src": [
+  {
+   "s": 0,
+   "e": 4.2,
+   "src": "memo"
+  },
+  {
+   "s": 4.2,
+   "e": 10.75,
+   "src": "relay"
+  },
+  {
+   "s": 10.75,
+   "e": 12.15,
+   "src": "freeze"
+  },
+  {
+   "s": 12.15,
+   "e": 18.7,
+   "src": "relay"
+  },
+  {
+   "s": 18.7,
+   "e": 38.796,
+   "src": "direct"
+  }
+ ],
+ "cues": [
+  {
+   "s": 0.6,
+   "e": 4.0,
+   "who": "Lena",
+   "en": "Don't trust the me who's talking.",
+   "zh": "别信正在说话的我。"
+  },
+  {
+   "s": 4.5,
+   "e": 8.8,
+   "who": "Center feed",
+   "en": "I'm fine. Don't send anyone.",
+   "zh": "我没事，别叫人来。"
+  },
+  {
+   "s": 12.450000000000001,
+   "e": 16.75,
+   "who": "Center feed",
+   "en": "I'm fine. Don't send anyone.",
+   "zh": "我没事，别叫人来。"
+  },
+  {
+   "s": 19.0,
+   "e": 22.8,
+   "who": "Lena",
+   "en": "It's Lena. Archive. We've only ever talked on headset.",
+   "zh": "我是 Lena，档案室的。我们一直只在耳机里说话。"
+  },
+  {
+   "s": 22.9,
+   "e": 24.6,
+   "who": "Lena",
+   "en": "They locked me in B2.",
+   "zh": "他们把我锁在地下二层了。"
+  },
+  {
+   "s": 24.6,
+   "e": 26.6,
+   "who": "Lena",
+   "en": "You're the only one outside their system.",
+   "zh": "你是他们系统外唯一的人。"
+  },
+  {
+   "s": 26.6,
+   "e": 28.7,
+   "who": "Lena",
+   "en": "That feed? Not me.",
+   "zh": "转播上那个？不是我。"
+  },
+  {
+   "s": 31.65,
+   "e": 33.35,
+   "who": "Lena",
+   "en": "Someone's at the door.",
+   "zh": "门外有人。"
+  },
+  {
+   "s": 33.75,
+   "e": 38.55,
+   "who": "Lena",
+   "en": "Don't hang up. Test me, or tell me what you know.",
+   "zh": "别挂。考考我，或者把你知道的告诉我。"
+  }
+ ],
+ "msgs": [
+  {
+   "at": 10.85,
+   "who": "Lena",
+   "en": "Still on shift? Look at the feed for me.",
+   "zh": "还在值班吗？帮我看一眼转播。"
+  },
+  {
+   "at": 17.5,
+   "who": "Lena",
+   "en": "Direct call. Pick up.",
+   "zh": "直连。接。"
+  }
+ ],
+ "evidence": [
+  {
+   "id": "E01",
+   "at": 1.0
+  }
+ ],
+ "fx": [
+  {
+   "type": "signal_cut",
+   "at": 18.45,
+   "dur": 0.5
+  },
+  {
+   "type": "shake",
+   "at": 30.95,
+   "dur": 0.4
+  }
+ ],
+ "version": "v2"
+}
