@@ -300,6 +300,7 @@ body.start #tc{display:none}
   <div id="toast" hidden></div>
 </div>
 <script src="rt-player.js?v=3"></script>
+<script src="rt-history.js?v=1dd85f11"></script>
 <script>
 (() => {
 const $ = id => document.getElementById(id);
@@ -473,7 +474,7 @@ function showTip(){ const box = $('tipMsgs'), S = $('tip'); S.hidden = false; bo
 let replayFn = null;
 function playOpening(){
   showSub(null); ov.currentTime = 0; ov.muted = false; ov.loop = false; const fired = new Set();
-  RT.begin({key: 'OPEN', parts: [{v: ov, d: UI.total}]}); replayFn = playOpening;
+  RT.begin({hist: {cues: (typeof OPEN_CUES !== 'undefined' ? OPEN_CUES : null)}, key: 'OPEN', parts: [{v: ov, d: UI.total}]}); replayFn = playOpening;
   ov.play().then(() => show(ov)).catch(() => { show(ov); toast(T('Tap the screen to start', '点一下画面开始')); });
   ov.ontimeupdate = () => { const t = ov.currentTime; const c = UI.cues.find(q => t >= q.s && t <= q.e); showSub(c || null); const s = UI.src.find(q => t >= q.s && t < q.e); if (s) setSrc(s.src);
     UI.msgs.forEach((m, i) => { if (t >= m.at && !fired.has('m' + i)){ fired.add('m' + i); bubble('Lena', m); } });
@@ -556,7 +557,7 @@ async function liveRound(kind, choice, said){
     AE.bgm(r.bgm || 'dread', .24);
     bubble(T('You', '你'), said, true);
     view.play_at = Date.now(); view.seg2_eta = r.segs[1] ? r.segs[1].eta_left : null;
-    RT.begin({key: 'round:' + rid, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T(`Move ${round + 1}`, `第 ${round + 1} 步`)}); RT.part(0);
+    RT.begin({hist: {r: r, her: (typeof herLine !== 'undefined' ? herLine : (typeof said !== 'undefined' && said ? (said.zh || said.en || '') : ''))}, key: 'round:' + rid, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T(`Move ${round + 1}`, `第 ${round + 1} 步`)}); RT.part(0);
     await play(0); view.seg1_end = Date.now();
     const ok2 = () => segErr() || (r.segs[1].url && V[1].dataset.src === r.segs[1].url && V[1].readyState >= 3);
     if (!ok2()){ while (!ok2() && my === liveRun) await new Promise(res => setTimeout(res, 100)); }
@@ -579,7 +580,7 @@ async function liveRound(kind, choice, said){
   const sceneNo = round + 1;
   replayFn = () => {
     const go = (j, t) => { const v = V[j]; tick(j, v, new Set(['replay'])); v.currentTime = t; v.muted = false; v.loop = false; v.onended = () => { v.ontimeupdate = null; showSub(null); if (j + 1 < V.length){ RT.part(j + 1); go(j + 1, 0); } else { v.onended = null; RT.clear(); setSrc('direct'); openChoice(); } }; v.play().then(() => show(v)).catch(() => {}); };
-    RT.begin({key: 'round:' + rid, free: true, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T(`Move ${sceneNo}`, `第 ${sceneNo} 步`), jump: (j, t) => { V.forEach(x => { if (x !== V[j]){ x.pause(); x.onended = null; x.ontimeupdate = null; } }); go(j, t); }});
+    RT.begin({hist: {r: r, her: (typeof herLine !== 'undefined' ? herLine : (typeof said !== 'undefined' && said ? (said.zh || said.en || '') : ''))}, key: 'round:' + rid, free: true, parts: r.segs.map((x, i) => ({v: V[i], d: x.dur || x.seconds})), label: T(`Move ${sceneNo}`, `第 ${sceneNo} 步`), jump: (j, t) => { V.forEach(x => { if (x !== V[j]){ x.pause(); x.onended = null; x.ontimeupdate = null; } }); go(j, t); }});
     go(0, 0);
   };
   tell({ev: 'round', n: round + 1, text: herLine, en: ((r.lines || {}).seg1 || [])[0] || '', zh: ((r.zh || {}).seg1 || [])[0] || ''});
